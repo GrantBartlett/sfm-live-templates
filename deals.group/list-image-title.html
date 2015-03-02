@@ -1,0 +1,22 @@
+<section class="sidebar-2col mb-20">
+  <header>
+    <h1>Deals</h1>
+  </header>
+
+  {exp:channel:entries channel="entry" category="7" limit="6" cache="yes" refresh="10"}
+
+  {exp:grouper:start groupby="2" count="{count}" total="{total_results}" last_class="last"}
+  <div class="row clear">
+  {/exp:grouper:start}
+
+    <article class="{switch='c-1|c-2'} mb-20">
+      <a href="{site_url}deals/{url_title}"><img src="{if entry_image}{entry_image}{if:else}/images/placeholders/deals/test_{count}.jpg{/if}"></a>
+      <h2><a href="#">{title}</a></h2>
+    </article>
+
+  {exp:grouper:end groupby="2" count="{count}" total="{total_results}"}
+  </div>
+  {/exp:grouper:end}
+
+  {/exp:channel:entries}
+</section>

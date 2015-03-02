@@ -1,0 +1,26 @@
+<section class="lookbook">
+  <article dir="ltr">
+    <ul class="slides" style="height: 500px;">
+      {entry_gallery}
+      <li><img src="{image_source:large}" alt="" data-title="{image_title_lng}" data-caption="{image_excerpt_lng}"></li>
+      {/entry_gallery}
+    </ul>
+    <div class="slide-navigation">
+      <a id="prev" href="#">Prev</a>
+      <a id="next" href="#">Next</a>
+    </div>
+    <small class="counter"></small>
+    <h2 class="image-title"></h2>
+    <p class="image-caption"></p>
+  </article>
+</section>
+
+<script>
+  $(document).ready(function(){
+    $.getScript("/assets/js/lookbook.js", function(){
+      LookBook.slide_total();
+      LookBook.show_slides();
+      LookBook.click_next();
+    });
+  });
+</script>

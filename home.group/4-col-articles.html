@@ -1,0 +1,22 @@
+{exp:channel:entries channel="entry" category="5" limit="8" offset="7" cache="yes" refresh="10" dynamic="no" status="{embed:status}"}
+
+{exp:grouper:start groupby="4" count="{count}" total="{total_results}"}
+<div class="l-4c">
+  {/exp:grouper:start}
+
+  <article class="tertiary {switch='c-1|c-2|c-3|c-4'} mb-20">
+      <div class="polaroid drop-shadow">
+        <a href="{base}articles/reading/{url_title}/" class="image"><img src="{entry_image:3_col_large_sq}" style="width: 100%"></a>
+        <span class="category fixed-category">{categories show_group="6" limit="1"}<a href="{base}articles/category/{category_url_title}/">{category_name_{language_code}}</a>{/categories}</span>
+    </div>
+    <h1 class="gamma"><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+    <p class="gamma mt-5 mb-0">{entry_excerpt_trunc_lng}</p>
+    <p class="gamma mt-5 mb-0"><strong><a href="{base}articles/reading/{url_title}/">{read_more_{language_code}} <i class="icon-chevron-{if language_code == 'ar'}left{if:else}right{/if}"></i></a></strong></p>
+  </article>
+
+  {exp:grouper:end groupby="4" count="{count}" total="{total_results}"}
+</div>
+{/exp:grouper:end}
+
+{/exp:channel:entries}
+

@@ -1,0 +1,19 @@
+{exp:channel:entries channel="entry" category_group="2" category="29" cache="yes" refresh="10" offset="3" dynamic="no" status="{embed:status}" limit="10"}
+
+{exp:grouper:start groupby="4" count="{count}" total="{total_results}"}
+<div class="three-clear l-4c">
+    {/exp:grouper:start}
+
+    <article class="tertiary {switch='c-1|c-2|c-3|c-4'} video" {entry_dir_lng}>
+    <a href="{base}lookbooks/viewing/{url_title}/" class="image">
+        <img src="{entry_image:3_col_large}" style="width: 100%">
+    </a>
+
+    <h1 class="gamma"><a href="{base}lookbooks/viewing/{url_title}/">{entry_name_lng}</a></h1>
+    </article>
+
+    {exp:grouper:end groupby="4" count="{count}" total="{total_results}"}
+</div>
+{/exp:grouper:end}
+{if no_results}<p>Sorry, no results returned</p>{/if}
+{/exp:channel:entries}

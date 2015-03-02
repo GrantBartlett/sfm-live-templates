@@ -1,0 +1,51 @@
+{if group_id == '1'}
+<section class="notice featured g-all-c mt-20">
+    <header class="entry-header">
+        <div class="entry-description text-center panel-default">
+              <i class="fa fa-facebook fa-fw"></i>&nbsp; <span class="shares"></span>&nbsp; &nbsp; 
+              <i class="fa fa-twitter fa-fw"></i>&nbsp; <span class="tweets"></span>
+        </div>
+    </header>
+
+    <script>
+        $(function(){
+            $.ajax({
+                url: "//graph.facebook.com/?ids={current_url}",
+                dataType: 'json',
+
+                success: function (data) {
+                    if(data['{current_url}']['shares'] === '1')
+                    {
+                        $(".shares").append('{sharetowin_Shared_{language_code}} '+ data['{current_url}']['shares'] + ' {sharetowin_time_{language_code}}');
+                    }
+                    else if(data['{current_url}']['shares'] > '1'){
+                        $(".shares").append('{sharetowin_Shared_{language_code}} '+ data['{current_url}']['shares'] + ' {sharetowin_times_{language_code}}');
+                    }
+                    else
+                    {
+                        $(".shares").append('{sharetowin_FirstToShare_{language_code}}');
+                    }
+                }
+            });
+            $.ajax({
+                url: "//urls.api.twitter.com/1/urls/count.json?url={current_url}",
+                dataType: 'jsonp',
+
+                success: function (data) {
+                    if(data.count == '1')
+                    {
+                        $(".tweets").append('{sharetowin_Tweeted_{language_code}} '+ data.count + ' {sharetowin_time_{language_code}}');
+                    }
+                    else if(data.count > '1'){
+                        $(".tweets").append('{sharetowin_Tweeted_{language_code}} ' + data.count + ' {sharetowin_times_{language_code}}');
+                    }
+                    else
+                    {
+                        $(".tweets").append('{sharetowin_FirstToTweet_{language_code}}');
+                    }
+                }
+            });
+        });
+    </script>
+</section>
+{/if}

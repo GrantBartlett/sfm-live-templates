@@ -1,0 +1,109 @@
+{embed="__includes/wrapper" body_class="sfmplus sub home report"}
+
+{exp:partials:set name="sections"}
+
+{if segment_3}
+<section class="competition featured g-all-c">
+    <div class="mt-20">
+        <div class="row">
+            <div class="col-xs-12">
+                <header class="entry-header">
+                    {exp:freeform:form_info form_id="{segment_3}" }
+                    <h1 class="section-header {if '{language_code}' == 'en'}text-left {if:else}text-right{/if} mb-0 pb-10">
+                        <a href="{path='report/entries/{freeform:form_id}'}"><span class="sign">{freeform:form_label}</span></a> {freeform:total_entries} entries
+                    </h1>
+                    {/exp:freeform:form_info}
+                    <p>
+                        <a href="/report/entries" class="button radius"><i class="fa fa-arrow-circle-left"></i> All listings</a>
+                    </p>
+                </header>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>First Name</th>
+                            <th>Screen Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Location</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {exp:freeform:entries form_id="{segment_3}" paginate="top" limit="100" orderby="entry_id" sort="asc"}
+                        {if freeform:total_results >= 50}
+                            {freeform:paginate}
+                                <h1 class="col-xs-12 clearfix mb-30 text-right">
+                                    Page {freeform:current_page} of {freeform:total_pages} pages &nbsp; {freeform:pagination_links}
+                                </h1>
+                            {/freeform:paginate}
+                        {/if}
+                        <tr>
+                            <td>{freeform:entry_id}</td>
+                            <td>{if freeform:field:name}{freeform:field:name}{/if} {if freeform:field:first_name}/ {freeform:field:first_name}{/if}</td>
+                            <td>{if freeform:field:hidden_screen_name}{freeform:field:hidden_screenname}{/if}</td>
+                            <td>{if freeform:field:email}{freeform:field:email} /{/if} {if freeform:field:hidden_email} {freeform:field:hidden_email}{/if}</td>
+                            <td>{if freeform:field:mobile_number}{freeform:field:mobile_number} /{/if}{if freeform:field:hidden_telephone} {freeform:field:hidden_telephone} {/if}</td>
+                            <td>{freeform:field:hidden_city}</td>
+                        </tr>
+                        {/exp:freeform:entries}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+</section>
+
+{if:else}
+<section class="competition featured g-all-c">
+    <div class="mt-20">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <header class="entry-header">
+                    <h1 class="section-header {if '{language_code}' == 'en'}text-left {if:else}text-right{/if} mb-0 pb-10">
+                        <span class="sign">Live</span> Competitions report
+                    </h1>
+                </header>
+                <div class="entry-description">
+                     <p class="lead">Select a competition to view who has entered.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>First Name</th>
+                            <th>No. Entries</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {exp:freeform:form_info form_id="18|7|20|21|12|5|17|19|16|6|13|15"}
+                        <tr>
+                            <td>{freeform:form_id}</td>
+                            <td><a href="{path='report/entries/{freeform:form_id}'}">{freeform:form_label}</a></td>
+                            <td><a href="{path='report/entries/{freeform:form_id}'}">{freeform:total_entries}</a></td>
+                            <td><a href="{path='report/entries/{freeform:form_id}'}">View  <i class="fa fa-arrow-circle-right"></i> </a></td>
+                        </tr>
+                        {/exp:freeform:form_info}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</section>
+{/if}
+{/exp:partials:set}

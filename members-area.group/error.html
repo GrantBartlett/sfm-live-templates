@@ -1,0 +1,45 @@
+{embed="__includes/wrapper" body_class="sfmplus sub members-area content message"}
+
+{exp:partials:set name="page_title"}SFM+ Members Area{/exp:partials:set}
+
+{exp:partials:set name="opening_body"}
+<div id="fb-root"></div>
+<script src="/assets/js/fb_login.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+{embed="sfm-plus/header"}
+
+<div id="content">
+
+
+    <section class="content-section center l-1c">
+        <article class="c-1">
+            <header class="entry-header">
+                <h1 class="entry-title">{heading}</h1>
+            </header>
+            <p>{content}</p>
+            <p>{link}</p>
+        </article>
+    </section>
+
+    <div id="terms" class="reveal-modal medium">
+        terms of service
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="privacy" class="reveal-modal medium">
+        Privacy
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+</div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+{embed="_aside/sfm-plus"}
+{/exp:partials:set}
+
+

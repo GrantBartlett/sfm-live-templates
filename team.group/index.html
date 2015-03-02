@@ -1,0 +1,33 @@
+{embed="__includes/wrapper" body_class="team" nav_active=""}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+    <header class="entry-header">
+        <h1 class="section-header text-left">{team_title_{language_code}}</h1>
+        <div class="entry-description">
+            <p>{team_para_{language_code}}</p>
+        </div>
+    </header>
+
+    {exp:channel:entries channel="team"}
+    <a href="{base}team/member/{url_title}/" class="link-block">
+        <article class="l-70-30cr">
+            <div class="c-1"><img src="{team_member_image:280}" style="width: 100%; padding: 5px"></div>
+            <div class="c-2">
+                <p class="category">{team_member_job_{language_code}}</p>
+                <h1>{team_member_name_{language_code}}</h1>
+                <p>{team_member_large_excerpt_{language_code}}</p>
+                <p></p>
+            </div>
+        </article>
+    </a>
+    <hr class="thin">
+    {/exp:channel:entries}
+
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+{embed="_aside/articles" article-list-limit="6" status="{entry_status_lng}"}
+{/exp:partials:set}

@@ -1,0 +1,33 @@
+<section class="content-section featured-articles">
+
+    <div class="l-70-30c">
+        {exp:channel:entries channel="entry" category_group="6" category="{embed:category}" limit="1" cache="yes" refresh="10" sticky="no"
+        status="{embed:status}"}
+        <article class="c-1 main {entry_lng}" {entry_dir_lng}>
+            <div class="mb-20">
+              <a href="{base}articles/reading/{url_title}/" class="image-link"><img src="{entry_image:70_30_large}" style="width: 100%" class="mb-0"></a>
+            </div>
+            <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+            {!--<small class="author h-hide hl-hide">By {author}</small>--}
+            <p>{entry_description_lng}</p>
+        </article>
+
+        {if no_results}Sorry, there are no articles yet...{/if}
+
+        {/exp:channel:entries}
+
+        <div class="c-2">
+            {exp:channel:entries channel="entry" category_group="6" category="{embed:category}" limit="3" offset="1" cache="yes"
+            refresh="10" sticky="no" status="{embed:status}"}
+            <article class="{entry_lng}"
+                {entry_dir_lng}>
+                <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+                <a href="{base}articles/reading/{url_title}/"><img src="{entry_image:tiny}" class="little-image left"></a>
+                <p>{entry_excerpt_lng}</p>
+            </article>
+            {/exp:channel:entries}
+        </div>
+
+    </div>
+
+</section>

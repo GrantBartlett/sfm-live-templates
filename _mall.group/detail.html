@@ -1,0 +1,162 @@
+<?php
+  // done with php as calling EE tag for todays date uses 2 db calls!!!
+  $today = date('l', time());
+?>
+{exp:channel:entries channel="mall" url_title="{embed:url_title}" cache="yes" refresh="10"}
+{if no_results}
+<h1>Sorry there are no results for this url.</h1>
+<p>Try clicking on one of the areas below:</p>
+{embed="_mall/area-list"}
+{/if}
+
+<?php
+  /**
+  * Get the opening times and todays opening times
+  * Saves db calls as each call to the matrix uses a huge number of db calls
+  */
+  $opentimes_array = array(
+    {mall_open_times backspace="1"}array("{day}", "{from_am}", "{to_am}", "{from_pm}", "{to_pm}"),{/mall_open_times}
+  );
+  // get todays opening times
+  foreach($opentimes_array as $day) {
+    if (in_array($today, $day)) {
+      $today_times = $day;
+    }
+  }
+?>
+<section class="content-section detail">
+  <article id="post-id-{entry_id}">
+    <header class="entry-header">
+      <h3 class="category"><a href="{site_url}shopping/malls/in/{exp:urlify}{city}{/exp:urlify}/" title="View all malls in {city}">{city}</a></h3>
+      <h1 class="entry-title">{title}</h1>
+      <div class="entry-meta">
+              <span class="m-pout d-1">
+                {if mall_open_times}
+                <a href="#opentime" class="e-show-data">Opening times</a>
+                <table class="vertical-article-list h-data">
+                  <tr class="child active"><td class="first"><b>Open today:</b></td><td><?= $today_times[1]; ?></td><td><?= $today_times[2]; ?></td><td><?= $today_times[3]; ?></td><td><?= $today_times[4]; ?></td></tr>
+                  <?php
+                    foreach($opentimes_array as $day) {
+                  ?>
+                  <tr class="child <?php if ($today == $day[0]) echo 'current' ?>">
+                    <td class="first"><b><?= $day[0] ?></b></td><td><?= $day[1] ?></td><td><?= $day[2] ?></td><td><?= $day[3] ?></td><td><?= $day[4] ?></td>
+                  </tr>
+                  <?php } ?>
+                </table>
+                {if:else}
+                No opening times available
+                {/if}
+              </span>
+        <span class="entry-brands"><a href="#brands" class="view_brands">View Brands</a></span>
+        {if logged_in}
+          {exp:favorites:saved entry_id="{entry_id}"}
+            {if saved}
+              <span class="entry-byline rem_fav">
+                <i class="pl_favorites_status" style="display: none"></i>
+                <a class="pl_favorites_delete" href="/favourite/{entry_id}/delete/" title="Remove this mall as a favourite" rel="favourite">Remove from Favourites</a>
+                <a class="pl_favorites_save" href="/favourite/{entry_id}/" title="Add this mall as a favourite" rel="favourite" style="display: none">Add to Favourites</a>
+              </span>
+            {/if}
+            {if not_saved}
+              <span class="entry-byline add_fav">
+                <i class="pl_favorites_status" style="display: none"></i>
+                <a class="pl_favorites_save" href="/favourite/{entry_id}/" title="Add this brand as a favourite" rel="favourite">Add to Favourites</a>
+                <a class="pl_favorites_delete" href="/favourite/{entry_id}/delete/" title="Remove this brand as a favourite" rel="favourite" style="display: none">Remove from Favourites</a>
+              </span>
+            {/if}
+          {/exp:favorites:saved}
+        {if:else}
+          <span class="entry-byline"><a href="/member/login/" title="Please login to save this to your favourites" rel="favourite">Sign in to add to Favourites</a></span>
+        {/if}
+        <span class="entry-comments"><a href="#disqus_thread">Comments</a></span>
+      </div>
+    </header>
+    <div class="entry-content">
+      <aside class="post-rail mall">
+        {if mall_image}<a href="{site_url}shopping/mall/{url_title}" class="c-1 h-hide"><img src="{mall_image:small}" style="width: 100%"></a>{if:else}<a href="{url_title}" class="c-1 h-hide"><img src="{site_url}images/placeholders/mall_265x180.gif" style="width: 100%"></a>{/if}
+        <div class="entry-tools group">
+          <ul class="share-tools">
+            <li class="email c-1"><a
+                href="#email-script-goes-here"
+                data-omniture-event="email" target="_blank"><span class="icon"></span>Email</a></li>
+            <li class="print c-2"><a
+                href="#/print/"
+                target="_blank" data-omniture-event="print"><span class="icon"></span>Print</a></li>
+            <li class="share c-3">
+              <a href="#"><span class="icon"></span>Share</a>
+              <ul class="share-icons">
+                <li class="facebook"><a
+                    href="http://www.facebook.com/sharer.php?u={exp:url_encode}{site_url}{url_title}{/exp:url_encode}"
+                    target="_blank">Facebook</a></li>
+                <li class="twitter"><a
+                    href="https://twitter.com/intent/tweet?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;via=SaudiFashion"
+                    target="_blank">Twitter</a></li>
+                <li class="tumblr"><a
+                    href="http://www.tumblr.com/share/link?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;name=SaudiFashion"
+                    target="_blank">Tumblr</a></li>
+                <li class="linkedin"><a
+                    href="http://www.linkedin.com/shareArticle?mini=true&amp;url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}&amp;summary={exp:url_encode}{mall_excerpt}{/exp:url_encode}&amp;source=SaudiFashion"
+                    target="_blank">LinkedIn</a></li>
+                <li class="stumbleupon"><a
+                    href="http://www.stumbleupon.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">StumbleUpon</a></li>
+                <li class="reddit"><a
+                    href="http://reddit.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Reddit</a></li>
+                <li class="digg"><a
+                    href="http://digg.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Digg</a></li>
+                <li class="mixx"><a
+                    href="http://mixx.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Mixx</a></li>
+                <li class="delicious"><a
+                    href="http://delicious.com/post?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Delicious</a></li>
+                <li class="google"><a
+                    href="https://plusone.google.com/share?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}"
+                    target="_blank">Google+</a></li>
+              </ul>
+            </li>
+            <li class="comment c-4"><a href="#comments" data-omniture-event="comment-click"><span class="icon"></span>Comment</a></li>
+          </ul>
+        </div>
+      </aside>
+      {if mall_body_content}{mall_body_content}{if:else}{mall_excerpt}{/if}
+    </div>
+  </article>
+</section>
+
+<hr>
+
+<section id="brands" class="content-section">
+  <header>
+    <h1 class="section-header">Brands in this mall</h1>
+  </header>
+  <div class="three-clear l-4c">
+    {brands}
+      {if brands:no_results}
+        We haven't added any brands for this mall yet, don't worry, we're on it.
+      {/if}
+      {exp:gwcode_alternate count="{brands:count}" alternate="c-1|c-2|c-3|c-4"}
+        <article class="tertiary {alternate_value} brand mb-20">
+          <a href="/shopping/brand/{brands:url_title}/" class="image" title="{brands:title}">
+            <img src="{brands:brand_logo}" alt="{brands:title}">
+          </a>
+        </article>
+      {/exp:gwcode_alternate}
+    {/brands}
+  </div>
+</section>
+
+<hr>
+
+<section id="deals" class="pl_masonry_wall">
+  <h1 class="section-header">Deals</h1>
+  {embed="deals/masonry-wall"}
+</section>
+
+{embed="__includes/disqus"}
+
+{/exp:channel:entries}
+
+

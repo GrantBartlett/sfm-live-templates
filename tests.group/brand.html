@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mall test</title>
+  </head>
+  <body>
+  {exp:channel:entries channel="brand"}
+  <h1>{title}</h1>
+  <p>{brand_excerpt}</p>
+  {parents field="brands"}
+  <hr>
+  <h4>{parents:title}</h4>
+  <p>{parents:mall_excerpt}</p>
+  {/parents}
+  <hr><hr>
+  {/exp:channel:entries}
+  </body>
+</html>

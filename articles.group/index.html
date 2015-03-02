@@ -1,0 +1,57 @@
+{embed="__includes/wrapper" body_class="articles" nav_active=""}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+    {!-- catch uri without further segments --}
+    {if segment_2 == ""}
+
+      {embed="articles/featured-articles" status="{entry_status_lng}"}
+      <hr>
+      {embed="articles/editors-picks" status="{entry_status_lng}"}
+      <hr>
+      {embed="articles/the-latest" limit="12" category_group="6" offset="4" status="{entry_status_lng}"}
+      {embed="articles/list-of-threes" status="{entry_status_lng}"}
+
+    {if:else}
+
+      {exp:switchee variable = "{segment_2}" parse="inward"}
+
+        {case value="category" default="Yes"}
+          <header class="entry-header">
+              <h1 class="section-header {if language_code == "en"}text-left{if:else}text-right{/if} mb-0 pb-5">
+                  {exp:channel:categories category_group="6" show="{last_segment_category_id}"
+                  style="linear"}{category_name_{language_code}}{/exp:channel:categories}
+              </h1>
+              {if last_segment_category_description != ""}
+              <div class="entry-description">
+                  <p>
+                      {exp:channel:categories category_group="6" show="{last_segment_category_id}" style="linear"}
+                          {category_description_{language_code}}
+                      {/exp:channel:categories}
+                  </p>
+              </div>
+              {/if}
+          </header>
+          {embed="articles/featured-articles" category="{last_segment_category_id}" status="{entry_status_lng}"}
+          <hr>
+          {embed="articles/editors-picks" status="{entry_status_lng}"}
+          <hr>
+            <section id="articles" class="content-section the-latest">
+                <header>
+                    <h1 class="section-header">{the_latest_{language_code}}</h1>
+                </header>
+                {embed="articles/list" category="5&{segment_3_category_id}" offset="0" status="{entry_status_lng}" limit="10"}
+            </section>
+        {/case}
+
+      {/exp:switchee}
+
+    {/if}
+
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+{embed="_aside/articles" article-list-limit="24" status="{entry_status_lng}"}
+{/exp:partials:set}

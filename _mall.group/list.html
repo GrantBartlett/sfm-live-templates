@@ -1,0 +1,27 @@
+{exp:channel:entries channel="mall" orderby="title" sort="asc" search:city="{embed:search_filter}" url_title="{embed:url_title}" cache="yes" refresh="10"}
+{if no_results}
+  <h1>Sorry there are no results for this url.</h1>
+  <p>Try clicking on one of the areas below:</p>
+  {embed="mall/area-list"}
+{/if}
+<article class="l-70-30cr post">
+  {if mall_image}<a href="{site_url}shopping/mall/{url_title}/" class="c-1 h-hide"><img src="{mall_image:small}" style="width: 100%"></a>{if:else}<a href="{site_url}shopping/mall/{url_title}/" class="c-1 h-hide"><img src="{site_url}images/placeholders/mall_265x180.gif" style="width: 100%"></a>{/if}
+  <div class="c-2">
+    <a href="{site_url}shopping/malls/in/{exp:urlify}{city}{/exp:urlify}/" class="category">{city}</a>
+    <h1><a href="{site_url}shopping/mall/{url_title}/">{title}</a></h1>
+    {mall_excerpt}
+    <p class="view" style="float: left; width: 40%; margin: 0;"><a href="{site_url}shopping/mall/{url_title}/">View details</a></p>
+    <ul class="share-tools" style="float: right; width: 40%; margin: 0; text-align: right">
+      <li class="share c-3">
+        <a href="#"><span class="icon"></span>Share</a>
+        <ul class="share-icons">
+          <li class="facebook"><a href="http://www.facebook.com/sharer.php?u={exp:url_encode}{site_url}{url_title}{/exp:url_encode}" target="_blank">Facebook</a></li>
+          <li class="twitter"><a href="https://twitter.com/intent/tweet?url={exp:url_encode}{homepage}/{url_title}{/exp:url_encode}&amp;via=SaudiFashion" target="_blank">Twitter</a></li>
+          <li class="google"><a href="https://plusone.google.com/share?url={exp:url_encode}{url_title}{/exp:url_encode}" target="_blank">Google+</a></li>
+        </ul>
+      </li>
+      <li class="comment c-4"><a href="{site_url}shopping/mall/{url_title}/#comments" data-omniture-event="comment-click"><span class="icon"></span>Comment</a></li>
+    </ul>
+  </div>
+</article>
+{/exp:channel:entries}

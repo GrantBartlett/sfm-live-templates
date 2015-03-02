@@ -1,0 +1,36 @@
+{embed="__includes/wrapper" body_class="content members-area"}
+
+{exp:partials:set name="page_title"}{heading}{/exp:partials:set}
+
+{exp:partials:set name="first_head"}{meta_refresh}{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+    <section class="content-section">
+
+        <h1 class="section-header">{noti_thankyouforregistering_{language_code}}</h1>
+
+        <div class="entry-content">
+
+            {if language_code == "en"}
+                <h2>What to do next</h2>
+                <p>A confirmation email should arrive in your inbox shortly, click the activation link in there. If you do not receive your confirmation email please check your junk-mail.</p>
+            {if:else}
+                <h2>الخطوة التالية</h2>
+                <p>ستصلك رسالة على إيميلك، إضغط على الوصلة في الإيميل لتفعيل عضويتك، إذا لم تصلك الرسالة على الإيميل إبحث عنها في البريد الغير مرغوب فيه أو</p>
+            {/if}
+
+            <div class="problems_notification entry-content">
+                <h2><i class="icon-bell-alt"></i> {sfm_havingproblems_{language_code}}</h2>
+                <p>{sfm_havingproblems_message_{language_code}}</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{/exp:partials:set}

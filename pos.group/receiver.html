@@ -1,0 +1,36 @@
+<?php
+
+function simple_encrypt($text)
+{
+    $salt ='098123132iidjais';
+    return trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $salt, $text, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
+}
+
+function simple_decrypt($text)
+{
+    $salt ='098123132iidjais';
+    return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $salt, base64_decode($text), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+}
+
+?>
+
+<?php
+
+if($_GET['user']){
+
+    echo "Encrypted:::: " . $_GET['user'];
+
+    $uname = simple_decrypt($_GET['user']);
+
+    echo '<h1>Decrypted: ' . $uname . '</h1>';
+}
+?>
+
+
+
+{if get:user}
+{exp:logmein:now username="<?= $uname; ?>"}
+{redirect="/pos/index"}
+{if:else}
+No user found, please contact us if you received an email invite.
+{/if}

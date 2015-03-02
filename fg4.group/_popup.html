@@ -1,0 +1,23 @@
+{exp:channel:entries channel="fg4" limit="1" entry_id="920" dynamic="no"}
+<div id="competition_terms" class="reveal-modal medium">
+    <header class="entry-header">
+        <section class="clearfix">
+            <div class="left">
+                <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+            </div>
+            <div class="{if language_code == 'en'}right{if:else}left{/if} fg4logo">
+                <img src="{fg4_logo}">
+            </div>
+        </section>
+        <div class="entry-description">
+            {fg4_entry_content_{language_code}}
+
+            <div class="mb-0">
+                {embed="/fg4/_terms_conditions"}
+            </div>
+        </div>
+        <hr>
+    </header>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+{/exp:channel:entries}

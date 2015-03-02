@@ -1,0 +1,13 @@
+<section class="slider g-tp-6 mb-20">
+  <div class="slide-navigation">
+    <a id="prev" href="#" class="prev">Prev</a>
+    <a id="next" href="#" class="next">Next</a>
+  </div>
+  <div id="slideshow" class="pics" style="margin:auto">
+    {exp:channel:entries channel="slideshow" dynamic="no" cache="yes" refresh="60" url_title="home-slideshow"}
+    {slideshow}
+    <div><a href="{link}" style="background: url({image:slide_300x300}) no-repeat right bottom transparent;" title="{title}"></a></div>
+    {/slideshow}
+    {/exp:channel:entries}
+  </div>
+</section>

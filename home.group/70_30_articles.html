@@ -1,0 +1,25 @@
+{exp:channel:entries channel="entry" category="5" limit="1" cache="yes" refresh="10" offset="15" status="{embed:status}"}
+<article class="c-1 main" {entry_dir_lng}>
+  <div class="mb-20">
+    <a href="{base}articles/reading/{url_title}/" class="image-link"><img src="{entry_image:70_30_large}" style="width: 100%"></a>
+  </div>
+  <p><small class="cat">{categories show_group="6" limit="1"}<a href="{base}articles/category/{category_url_title}/">{category_name_{language_code}}</a>{/categories}</small></p>
+  <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+  <p>{entry_description_lng}</p>
+</article>
+{/exp:channel:entries}
+
+<ul class="vertical-article-list c-2">
+  {exp:channel:entries channel="entry" category="5" limit="7" cache="yes" refresh="10" offset="16" status="{embed:status}"}
+  <li class="{switch='||||tp-show hr-show|tp-show hr-show|d-show l-show hr-show'}"
+  {entry_dir_lng}>
+  {!-- if it's an article then this link, if video then {site_url}videos/watching/{url_title}/ and so on --}
+    <span class="polaroid drop-shadow little-image right" style="width: 60px; padding: 5px; margin-top: -7px;">
+        <a href="{base}articles/reading/{url_title}/"><img src="{entry_image:tiny}"></a>
+    </span>
+    <h2>
+        <a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a>
+    </h2>
+  </li>
+  {/exp:channel:entries}
+</ul>

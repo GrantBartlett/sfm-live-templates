@@ -1,0 +1,11 @@
+{
+"brand": [
+{exp:channel:entries channel="brand" orderby="title" sort="asc" backspace="1" limit="{segment_4}"}{
+"id": "{entry_id}",
+"category": "{categories}{category_name}{/categories}",
+"name": "{title}",
+"description": "{exp:add_slashes}{exp:strip_line_breaks}{exp:remove_html}{brand_summary}{/exp:remove_html}{/exp:strip_line_breaks}{/exp:add_slashes}",
+"brand": "{brand_images}{brand_logo}{/brand_images}"
+},{/exp:channel:entries}
+]
+}

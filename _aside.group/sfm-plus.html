@@ -1,0 +1,56 @@
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+    <section class="advert tp-hide mb-20 roundicons_container">
+        {embed="_entry/follow"}
+    </section>
+
+    {!-- embed="sfm-plus/coming-soon" status="{embed:status}" --}
+
+    {!--
+    <section class="mb-20 marged search">
+        <h2 class="mb-10">{search_{language_code}}</h2>
+        {exp:low_search:form collection="sfm-plus" search_mode="all" result_page="sfm-plus/search" form_class="custom mb-0"}
+        <input type="text" placeholder="{search_{language_code}} SFM Plus" name="keywords" id="keywords" value="">
+        <button type="submit" class="button small radius mb-0 float-right">{search_{language_code}}</button>
+        {/exp:low_search:form}
+    </section>
+
+    {if logged_in}
+    {embed="articles/list-excerpt-image" article-list-limit="6" status="{embed:status}"}
+    {/if}
+    --}
+    {exp:ce_cache:escape}
+    {if logged_out}
+    {if language_code == "en"}
+    <section class="aside-feature mb-20 marged ">
+        <h2 class="mb-20 text-center">Not a Member? Join Here</h2>
+        <p class="gamma mt-5">SFM PLUS membership is exclusively for our subscribers. You can become a SFM PLUS member by taking out a
+            subscription to our website.</p>
+        <p class="mt-10 mb-0 text-center"><a href="/sfm-plus/join/" class="button  radius mb-0">Sign up now</a></p>
+    </section>
+    {/if}
+    {/if}
+    {/exp:ce_cache:escape}
+
+    {exp:channel:entries channel="sfm_plus" category_group="2" category="8|9|10|11" cache="yes" refresh="10" limit="12" dynamic="no"}
+{!--
+    {exp:grouper:start groupby="2" count="{count}" total="{total_results}"}
+    <div class="row clear mb-10">
+        {/exp:grouper:start}
+
+        <article class="tertiary halves {switch='left|right'}" {entry_dir_lng}>
+        <a href="{base}sfm-plus/r/{url_title}/" class="image">
+            <img src="{entry_image:3_col_large}" style="width: 100%">
+            <span class="category fixed-category">{categories}{entry_category_name_{language_code}}{/categories}</span>
+        </a>
+
+        <h1 class="gamma mb-20"><a href="{base}sfm-plus/r/{url_title}/">{entry_name_lng}</a></h1>
+        </article>
+
+        {exp:grouper:end groupby="2" count="{count}" total="{total_results}"}
+    </div>
+    {/exp:grouper:end}
+--}
+    {/exp:channel:entries}
+
+</aside>

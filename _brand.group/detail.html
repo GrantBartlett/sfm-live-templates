@@ -1,0 +1,108 @@
+{exp:channel:entries channel="brand" url_title="{embed:url_title}" cache="yes" refresh="10"}
+{if no_results}
+<h1>Sorry there are no results for this url.</h1>
+<p>Try clicking on one of the areas below:</p>
+{embed="_mall/area-list"}
+{/if}
+<section class="content-section detail">
+  <article id="some-post-id{entry_id}">
+    <header class="entry-header">
+      <h3 class="category"><a href="{site_url}shopping/brands/category/{categories}{category_url_title}{/categories}/" title="View all brands in {categories}{category_name}{/categories}">{categories}{category_name}{/categories}</a></h3>
+      <h1 class="entry-title">{title}</h1>
+      <div class="entry-meta">
+        <span class="m-pout d-1">
+          <a href="#opentime" class="e-show-data">View malls</a>
+          <table class="vertical-article-list h-data">
+            <tr class="child active"><td class="first"><b>{title} is in the following malls</b></td></tr>
+            {parents channel="mall" field="brands"}
+            <tr class="child">
+              <td class="first"><a href="/shopping/mall/{parents:url_title}/">{parents:title}</a></td>
+            </tr>
+            {/parents}
+          </table>
+        </span>
+        <span class="entry-brands"><a href="#deals" class="view_brands">View Deals</a></span>
+        {if logged_in}
+          {exp:favorites:saved entry_id="{entry_id}"}
+            {if saved}
+              <span class="entry-byline rem_fav">
+                <i class="pl_favorites_status" style="display: none"></i>
+                <a class="pl_favorites_delete" href="/favourite/{entry_id}/delete/" title="Remove this mall as a favourite" rel="favourite">Remove from Favourites</a>
+                <a class="pl_favorites_save" href="/favourite/{entry_id}/" title="Add this mall as a favourite" rel="favourite" style="display: none">Add to Favourites</a>
+              </span>
+            {/if}
+            {if not_saved}
+              <span class="entry-byline add_fav">
+                <i class="pl_favorites_status" style="display: none"></i>
+                <a class="pl_favorites_save" href="/favourite/{entry_id}/" title="Add this brand as a favourite" rel="favourite">Add to Favourites</a>
+                <a class="pl_favorites_delete" href="/favourite/{entry_id}/delete/" title="Remove this brand as a favourite" rel="favourite" style="display: none">Remove from Favourites</a>
+              </span>
+            {/if}
+          {/exp:favorites:saved}
+        {if:else}
+          <span class="entry-byline"><a href="/member/login/" title="Please login to save this to your favourites" rel="favourite">Sign in to add to Favourites</a></span>
+        {/if}
+        <span class="entry-comments"><a href="#disqus_thread">Comments</a></span>
+      </div>
+    </header>
+    <div class="entry-content">
+      <aside class="post-rail mall">
+        {if brand_logo}<a href="{site_url}shopping/mall/{url_title}" class="c-1 h-hide"><img src="{brand_logo}" style="width: 100%"></a>{if:else}<a href="{url_title}" class="c-1 h-hide"><img src="{site_url}images/placeholders/mall_265x180.gif" style="width: 100%"></a>{/if}
+        <div class="entry-tools group">
+          <ul class="share-tools">
+            <li class="email c-1"><a
+                href="#email-script-goes-here"
+                data-omniture-event="email" target="_blank"><span class="icon"></span>Email</a></li>
+            <li class="print c-2"><a
+                href="#/print/"
+                target="_blank" data-omniture-event="print"><span class="icon"></span>Print</a></li>
+            <li class="share c-3">
+              <a href="#"><span class="icon"></span>Share</a>
+              <ul class="share-icons">
+                <li class="facebook"><a
+                    href="http://www.facebook.com/sharer.php?u={exp:url_encode}{site_url}{url_title}{/exp:url_encode}"
+                    target="_blank">Facebook</a></li>
+                <li class="twitter"><a
+                    href="https://twitter.com/intent/tweet?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;via=SaudiFashion"
+                    target="_blank">Twitter</a></li>
+                <li class="tumblr"><a
+                    href="http://www.tumblr.com/share/link?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;name=SaudiFashion"
+                    target="_blank">Tumblr</a></li>
+                <li class="linkedin"><a
+                    href="http://www.linkedin.com/shareArticle?mini=true&amp;url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}&amp;summary={exp:url_encode}{brand_excerpt}{/exp:url_encode}&amp;source=SaudiFashion"
+                    target="_blank">LinkedIn</a></li>
+                <li class="stumbleupon"><a
+                    href="http://www.stumbleupon.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">StumbleUpon</a></li>
+                <li class="reddit"><a
+                    href="http://reddit.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Reddit</a></li>
+                <li class="digg"><a
+                    href="http://digg.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Digg</a></li>
+                <li class="mixx"><a
+                    href="http://mixx.com/submit?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Mixx</a></li>
+                <li class="delicious"><a
+                    href="http://delicious.com/post?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}"
+                    target="_blank">Delicious</a></li>
+                <li class="google"><a
+                    href="https://plusone.google.com/share?url={exp:url_encode}{site_url}{url_title}{/exp:url_encode}"
+                    target="_blank">Google+</a></li>
+              </ul>
+            </li>
+            <li class="comment c-4"><a href="#comments" data-omniture-event="comment-click"><span class="icon"></span>Comment</a></li>
+          </ul>
+        </div>
+      </aside>
+      {brand_excerpt}
+    </div>
+  </article>
+</section>
+{/exp:channel:entries}
+<hr>
+
+{embed="_entry/lookbook" url_title="{url_title}"}
+
+
+{embed="__includes/disqus"}

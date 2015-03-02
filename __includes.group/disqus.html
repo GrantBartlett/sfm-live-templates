@@ -1,0 +1,98 @@
+<section id="comments" class="comments mb-20 mt-20 box-general">
+    <h1 class="section-header">{comments_{language_code}}</h1>
+
+    {exp:comment:form channel="entry" url_title="{segment_3}"}
+
+    {if logged_out}
+    {exp:user:register form:id="register_comments" required="username|password" error_page="sfm-plus/error"}
+        <div class="form-group">
+            <label for="username">{sfm_email_{language_code}}</label>
+            <input type="text" name="username" id="email" placeholder="e.g email@example.com" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="password">{sfm_password_{language_code}}</label>
+            <input type="password" name="password" id="password" placeholder="Password for your account" class="js_revealer_field form-control" required>
+        </div>
+
+        <input type="hidden" name="accept_terms" id="accept_terms" value="y">
+        <input type="hidden" name="page_url" id="page_url" value="{current_url}">
+
+        <div id="js_register_comments" class="clearfix mb-10 alert alert-warning" style="display: none;font-size:13px!important;"></div>
+
+        <div class="row clearfix">
+            <p class="col-md-6">
+                <input class="btn-lg btn btn-default btn-green btn-action" type="submit" name="submit" value="Sign Up to Comment">
+            </p>
+            <p class="col-md-6 text-center" style="padding:15px;">
+                Already have an account? <strong><a href="/members-area/" data-reveal-id="signin_modal">{sign_in_{language_code}}</a></strong>
+            </p>
+        </div>
+
+        <div class="form-group text-center facebook-login">
+            {exp:fbc:login login_button_label="Sign in using Facebook" permissions="email|" return_on_failure="/members-area" button_size="large" } {if fbc_logged_out == "y"}{fbc_login_button}{/if} {if fbc_logged_in == "y"}Logged in through Facebook (<a href="{path='logout'}">Log Out</a>){/if} {/exp:fbc:login}
+        </div>
+    {/exp:user:register}
+
+
+    <script type="text/javascript">
+        // prepare the form when the DOM is ready
+        $(function () {
+            $('#register_comments').parsley();
+
+            var options = {
+                target: '#js_register_comments',   // target element(s) to be updated with server response
+                success: showResponseJoinComp  // post-submit callback
+            };
+
+            // bind to the form's submit event
+            $('#register_comments').submit(function () {
+                // inside event callbacks 'this' is the DOM element so we first
+                // wrap it in a jQuery object and then invoke ajaxSubmit
+                $(this).ajaxSubmit(options);
+                // !!! Important !!!
+                // always return false to prevent standard browser submit and page navigation
+                return false;
+            });
+
+        });
+
+        function showResponseJoinComp(responseText, statusText, xhr, $form)  {
+            $("#js_register_comments").fadeIn(500);
+            if(responseText == '[object Object]')
+            {
+                 $("#js_register_comp").html("You are now registered, redirecting...");
+                // Registered
+                window.location.reload();
+            }
+        }
+    </script>
+    {/if}
+
+    {if logged_in}
+    <textarea name="comment" cols="70" rows="10" placeholder="Leave a comment" style="max-width: 800px; height: 100px" class="form-control">{comment}</textarea> {if captcha}
+    <label for="captcha">Please enter the word you see in the image below:</label><br/>
+
+    <p>{captcha}<br/> <input type="text" name="captcha" value="{captcha_word}" maxlength="20"/></p>
+    {/if}
+
+    <div class="checkbox">
+        <label> <input type="checkbox" name="notify_me" {notify_me}> Notify me of follow-up comments </label>
+    </div>
+
+    <p><button type="submit" name="submit" class="btn-green btn-action">Submit <i class="fa fa-comment-o"></i></button></p>
+    {/if}
+
+    {/exp:comment:form}
+
+    {exp:comment:entries sort="asc" limit="20"}
+    <article style="border-top: 1px solid #DFDDDA; padding: 20px; background: #EEE;">
+        {comment}
+        <p>
+            <small>
+                <img class="gravimage" src="{exp:gravatar email='{email}' size='50' rating='G'}"/> {name} on {comment_date format="%l, %F %Y - %g:%i:%s %a"}
+            </small>
+        </p>
+    </article>
+    {/exp:comment:entries}
+</section>

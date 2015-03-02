@@ -1,0 +1,304 @@
+{exp:member:custom_profile_data}
+    {exp:channel:entries channel="offers" url_title="{last_segment}" show_future_entries="yes" show_expired="yes" dynamic="no"}
+        {if "{offer_custom_fields}" == "y"}
+
+                <style type="text/css">
+                    #js_enter_now{
+                        display:none;
+                    }
+                </style>
+
+                {offer_form_elements}
+                <div id="profile-instructions" class="teaser text-left" style="padding: 0 25px;">
+                    <div id="js_toggle_details">
+                        <h3 class="mt-20 text-center">{sharetowin_step1of2_{language_code}}</h3>
+                        <p class="mt-30 mb-30 text-center">{sharetowin_step1of2_desc_{language_code}}</p>
+
+                        {exp:user:edit form:class="custom"}
+                            <div class="form-group">
+                                <label for="first_name">{sharetowin_FullName_{language_code}}</label>
+                                <input type="text" name="first_name" id="first_name" value="{first_name}" placeholder="E.g Joe Bloggs" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">{sfm_city_{language_code}}</label>
+                                <input etype="text" name="location" value="{location}" placeholder="{sfm_city_{language_code}}" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telephone">{sfm_telephone_{language_code}}</label>
+                                <input type="text" name="telephone" value="{telephone}" placeholder="{sharetowin_enteramobile_{language_code}}" class="form-control" required>
+                            </div>
+
+                            <button type="submit" name="submit" value="Next" class="btn-green btn-action mt-10 mb-10">
+                                {fg4_next_{language_code}}
+                            </button>
+                        {/exp:user:edit}
+                    </div>
+                </div>
+                {/offer_form_elements}
+
+        {/if}
+    {/exp:channel:entries}
+
+    <section id="js_update_profile">
+        {exp:freeform:form
+            form:id="comp_{exp:stash:freeform_id}"
+            form_id="{exp:stash:freeform_id}"
+            prevent_duplicate_on="hidden_email"
+            user_email_field="hidden_email"
+            notify_user="yes"
+            parse="inward"
+            inline_errors="yes"
+        }
+            {freeform:field:hidden_first_name"}
+            {freeform:field:hidden_city"}
+            {freeform:field:hidden_telephone"}
+            {freeform:field:hidden_email"}
+            {freeform:field:hidden_screenname"}
+            {freeform:field:hidden_share_image"}
+            {freeform:field:competition_image"}
+            {freeform:field:page_title"}
+            {freeform:field:competition_title"}
+            {freeform:field:competition_url"}
+
+            {if "{embed:customQuestion}" == "y"}
+                <div class="entered" style="display: none">
+                    <input type="text" name="competition_answer" value="" id="freeform_competition_answer" maxlength="350" placeholder="Enter your answer" class="form-control "required>
+                </div>
+            {/if}
+
+            <div id="js_shared" {if embed:canShare == 'yes'}style="display: none;"{/if} class="text-right">
+                {exp:freeform:entries form_id="{embed:form_id}" author_id="{logged_in_member_id}" parse="inward" limit="1"}
+                    <div class="btn-lg btn btn-default btn-green btn-action mt-10 mb-10">
+                        {sharetowin_YouEntered_{language_code}} <i class="fa fa-check"></i>
+                    </div>
+
+                    <div class="mt-10 mb-10">
+                        <small>
+                            {sharetowin_YouEnteredOn_{language_code}} {freeform:entry_date format="%F %j, %Y at %g:%i %a"}
+                        </small>
+                    </div>
+
+                    <div id="js_enter_message" class="clearfix mb-10 alert alert-warning" style="display: none;font-size:13px!important;"></div>
+
+                    <script type="text/javascript">
+                        $(function () {
+                            if ($.cookie('_email_{embed:entry_id}')) {
+                                shareMessage();
+                            }
+                        });
+                    </script>
+
+                    {if freeform:no_results}
+                        <style type="text/css">
+                            .entered {display:block!important;}
+                        </style>
+                        <button id="js_enter_now" type="submit" name="submit" value="Next" class="btn-lg btn btn-default btn-green btn-action mt-10 mb-10">
+                            {enter_now_{language_code}} <i class="fa fa-plus"></i>
+                        </button>
+                    {/if}
+                {/exp:freeform:entries}
+                <br>
+            </div>
+
+            {if freeform:no_results}
+            <p>Sorry, this competition is not ready yet!</p>
+            {/if}
+        {/exp:freeform:form}
+    </section>
+
+        <script type="text/javascript">
+            $(function () {
+                var $form = $('#comp_{exp:stash:freeform_id}');
+                var $generalErrors = $('#js_enter_message');
+
+                if ($.cookie('_comp_{embed:entry_id}'))
+                {
+                    shareMessage();
+                    shareSuccess();
+                }
+
+                $form.submit(function (e) {
+                    //hide all errors
+                    $('.error_message').hide().html('');
+                    $generalErrors.hide().html('');
+
+                    //jquery ajax shortcut
+                    $.post(
+
+                        //form url (Freeform autodetects ajax)
+                        $form.attr('action'),
+                        //form params
+                        $form.serialize(),
+                        //data handler
+                        function (data) {
+                            if (data.success == false) {
+                                //data.errors
+
+                                $.each(data.errors, function (i, item) {
+                                    if(item === 'No duplicate postings are allowed for this form')
+                                    {
+                                        // Customize error page
+                                        item = '{sharetowin_AlreadyShared_{language_code}}';
+                                    }
+                                    var $errorHolder = $('[name="' + i + '"]').
+                                        parent().find('#js_enter_message');
+
+                                    var error = ($.isArray(item) ? item.join('<br/>') : item);
+
+                                    //does the error holder field exist?
+                                    if ($errorHolder.length > 0) {
+                                        $errorHolder.append('<p>' + error + '</p>').show();
+                                    }
+                                    //lets add it to general errors
+                                    else {
+                                        $generalErrors.append('<p>' + error + '</p>').show();
+                                    }
+                                });
+                            }
+                            else if (data.success) {
+
+                                $.cookie('_comp_{embed:entry_id}', '{embed:urltitle}', { expires: 64 });
+
+                                $("#js_enter_now").html("{sharetowin_YouEntered_{language_code}} <i class='fa fa-check'></i>");
+
+                                var language = "{language_code}";
+                                var segment = "{segment_1}";
+
+                                if (language === 'en' && segment === 'share'){
+                                    // Has registered for the share competition, next step enter.
+                                    ga('send', 'pageview', '/share/entered-competition.html');
+                                }else if (language != 'en' && segment === 'share'){
+                                    // Has registered for the share competition AR, next step enter.
+                                    ga('send', 'pageview', '/ar/share/entered-competition.html');
+                                }
+
+                                // Un-hide enter form
+                                shareMessage();
+                                shareSuccess();
+                                shareEnable();
+                            }
+                        }
+                    );
+
+                    e.preventDefault();
+                    return false;
+                });
+            });
+        </script>
+
+
+    {if embed:canShare == 'yes'}
+        <div class="share-competition">
+            <div class="panel panel-default panel-dark text-center">
+                <div class="panel-heading">
+                    <h1>{sharetowin_ShareWithFriendsToEnter_{language_code}}</h1>
+                </div>
+                <div class="panel-body">
+                    <div id="js_sharelinks">
+                        <a class="btn facebook-share" id="facebook-share" style="text-transform: uppercase;"><i class="fa fa-facebook fa-lg fa-fw"></i> {sharetowin_Share_{language_code}} </a>
+                        <a href="https://twitter.com/intent/tweet?text={embed:tweet_{language_code}}&url={embed:tweet_bitly_{language_code}}&hashtags={embed:tweet_hashtag}" class="btn twitter-share" target="_blank" style="text-transform: uppercase;"><i class="fa fa-twitter fa-lg fa-fw"></i> {sharetowin_Tweet_{language_code}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right mb-20">
+            <button id="js_help" type="submit" class="btn-lg btn btn-default btn-green btn-action" style="opacity: 0.7;">
+                {enter_now_{language_code}} <i class="fa fa-lock"></i>
+            </button>
+        </div>
+    {/if}
+
+{/exp:member:custom_profile_data}
+
+<script type="text/javascript">
+    window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) {
+            t._e.push(f)
+        } });
+    }(document, "script", "twitter-wjs"));
+
+    twttr.ready(function (twttr) {
+        twttr.events.bind('tweet', function (event) {
+            shareSuccess();
+            $.cookie('_comp_{embed:entry_id}', '{embed:urltitle}', { expires: 64 });
+        });
+    });
+
+    $(function () {
+
+        $('#js_share_with_friends').parsley();
+
+        $("#js_noSocial").click('on', function () {
+            shareFailed();
+        });
+
+        $("#js_enSocial").click('on', function () {
+            shareEnable();
+        });
+
+        $("#js_help").click('on', function () {
+            $(".share-competition").stop().fadeIn(200).fadeOut(200).fadeIn(200);
+        });
+
+        if ($.cookie('_comp_{embed:entry_id}'))
+        {
+            shareSuccess();
+        }
+    });
+
+    function shareFailed() {
+        $("#js_shareEmail, #js_enShareLinks").toggle();
+    }
+
+    function shareSuccess() {
+        $("#js_shared").fadeIn(500);
+        $("#js_help").hide();
+        $("#teaser-instructions").hide();
+    }
+
+    function shareEnable() {
+        $("#js_shareEmail, #js_enShareLinks").toggle();
+    }
+
+    function shareMessage() {
+        $("#shared_successfully").fadeIn(500);
+        $(function () {
+            setTimeout(function () {
+                $("#shared_successfully").fadeOut(400, function () {
+                    $(this).css({"visibility": "hidden", display: 'block'}).slideUp();
+                });
+            }, 4500);
+        });
+    }
+
+    $("#facebook-share").click('on', function () {
+        FB.ui(
+            {
+                method: "feed",
+                name: "{embed:title_{language_code}}",
+//                caption: '{embed:tweet_{language_code}}',
+                description: (
+                    "{embed:tweet_{language_code}} {embed:tweet_bitly_{language_code}}"
+                    ),
+                link: "{current_url}",
+                picture: "https:{embed:facebook_image}"
+            },
+            function (response) {
+                if (response && response.post_id) {
+                    shareSuccess();
+                    $.cookie('_comp_{embed:entry_id}', '{embed:urltitle}', { expires: 64 });
+                }
+            }
+        );
+    });
+</script>

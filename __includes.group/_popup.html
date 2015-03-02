@@ -1,0 +1,88 @@
+{if logged_out}
+
+<div id="popup" class="reveal-modal small hidden-xs">
+    <section>
+            <img class="{if language_code == "en"}right-aligned{if:else}left-aligned{/if}" src="/themes/site_themes/saudifashion/sfm-logo-white.png" style="{if language_code == "en"}margin: 0 20px 0 40px;{if:else}margin: 0 40px 0 20px;{/if}">
+            <div class="js_moveup">
+                <h1 class="section-header {if language_code == "en"}text-left{if:else}text-right{/if}">{popup_headline_{language_code}}</h1>
+                <p class="mt-0">{popup_para_{language_code}}</p>
+                <style>
+                    body.sfmplus > .pop-down.popped-down {
+                        display: none;;
+                    }
+                    .right-aligned {
+                        float:right
+                    }
+                    .left-aligned {
+                        float:left
+                    }
+                    .pd-form {
+                        margin: 0;
+                    }
+                    .pd-div {
+                        width: 48%
+                    }
+                    .pd-div.left-aligned {padding-right: 10px}
+                    .pd-div.right-aligned {padding-left: 10px}
+                    .pd-label {
+                        padding: 5px 0;
+                    }
+                    .pd-butt {
+                        clear:both;
+                    }
+                    .pd-butt button {margin-bottom: 0}
+                </style>
+                {exp:freeform:composer form_id="9"}
+            </div>
+    </section>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<script>
+    $(function () {
+
+        detectmob();
+        function detectmob() {
+           if(window.innerWidth <= 800)
+           {
+                // Do nothing
+           }
+           else {
+                var close_popup = function() {
+                    $('#popup').foundation('reveal', 'close');
+                    $.cookie('popup', 'hidden', { expires: 7 });
+                    return false;
+                }
+
+                var dont_open_popup = false;
+
+                $(document).on('open', '#signin_modal', function () {
+                    dont_open_popup = true;
+                    $.cookie('popup', 'hidden', { expires: 7 });
+                });
+
+                $(document).on('open', '#join_modal', function () {
+                    dont_open_popup = true;
+                    $.cookie('popup', 'hidden', { expires: 7 });
+                });
+
+                setTimeout(function(){
+                    if ($.cookie('popup') !== 'hidden' && dont_open_popup === false) {
+                        $('#popup').foundation('reveal', 'open');
+                    }
+                }, 10000);
+
+                $(document).on('closed', '#popup', function () {
+                    close_popup();
+                    $.cookie('popup', 'hidden', { expires: 7 });
+                });
+
+                $('#popup').find('.button').on('click', function(){
+                    close_popup();
+                });
+           }
+        }
+    });
+</script>
+
+{/if}

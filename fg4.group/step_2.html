@@ -1,0 +1,119 @@
+{!-- PARSE IS HELL --}
+{exp:member:custom_profile_data}
+    {exp:query sql="SELECT * FROM exp_freeform_form_entries_21 WHERE author_id='{member_id}'"}
+        {!-- If we have terms agreed, carry on --}
+        {if "{form_field_15}" != ''}
+            {redirect="/fg4/step_3"}
+        {/if}
+    {/exp:query}
+{/exp:member:custom_profile_data}
+
+{if logged_out}
+    {redirect="/fg4/step_1"}
+{/if}
+
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+
+{exp:partials:set name="content"}
+    {!-- BEGIN --}
+
+    {exp:channel:entries channel="fg4" entry_id="928" dynamic="no"}
+        <?php $authorID = "{exp:stash:get name='author_id'}" ?>
+        <header class="entry-header">
+            <section class="clearfix">
+                <div class="{if language_code == 'en'}left{if:else}right{/if}">
+                    <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+                    <div class="entry-description">
+                        <p>{fg4_s_entry_name_{language_code}}</p>
+                    </div>
+                </div>
+                <div class="right fg4logo">
+                    <img src="{fg4_logo}">
+                </div>
+            </section>
+            <hr>
+        </header>
+
+        <div class="mb-30 entry-content">
+        {fg4_entry_content_{language_code}}
+        {exp:freeform:form
+            form_name="fg4"
+                required="terms_and_conditions|first_name|last_name|mobile_number"
+                return="fg4/step_3"
+                notify_user="yes"
+                user_notification_template="fg4_competition_notification"
+                user_email_field="hidden_email"
+                form:id="step_2"
+                prevent_duplicate_on="hidden_email"
+            }
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>{fg4_first_name_{language_code}} <span class="required">*</span></label>
+                        {freeform:field:first_name attr:required="required"}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <label>{fg4_last_name_{language_code}}<span class="required">*</span></label>
+                        {freeform:field:last_name attr:required="required"}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>{sfm_telephone_{language_code}} <span class="required">*</span></label>
+                        {freeform:field:mobile_number attr:required="required"}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <label>
+
+                            {fg4_i_agree_to_the_fg4_design_competition_{language_code}} <strong><a href="/fg4/terms-conditions" data-reveal-id="competition_terms" title="{fg4_terms_conditions_{language_code}}">{fg4_terms_conditions_{language_code}}</a></strong>
+                            <input type="checkbox" name="terms_and_conditions[]" value="y" id="freeform_terms_and_conditions_1" required>
+                        </label>
+                        {freeform:field:hidden_email}
+                        {freeform:field:hidden_screenname}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <button type="submit" name="submit" value="Next" class="btn-prim">{fg4_next_{language_code}} <i class="icon-caret-right"></i></button>
+                    </p>
+                    {if freeform:no_results}
+                    <p>
+                        Specified form was not found. Please make sure you have
+                        specified the correct short name of the form in the
+                        <b>form_name</b> parameter.
+                    </p>
+                    {/if}
+                </div>
+            </div>
+        {/exp:freeform:form}
+        </div>
+
+        {embed="fg4/_popup"}
+    {/exp:channel:entries}
+
+    {!-- END --}
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+<script src="/assets/js/jquery.validate.min.js"></script>
+{/exp:partials:set}
+
+{exp:member:custom_profile_data}
+    {exp:freeform:entries author_id='{member_id}' form_name="fg4" parse="inward"}
+        {exp:stash:set name="entry_id" parse_depth="3"}{freeform:entry_id}{/exp:stash:set}
+    {/exp:freeform:entries}
+{/exp:member:custom_profile_data}
+
+{exp:partials:set name="js_pageload"}
+$("#step_2").validate();
+{/exp:partials:set}

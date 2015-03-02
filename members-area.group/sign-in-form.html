@@ -1,0 +1,44 @@
+<div class="entry-content mb-30">
+    <h2 class="mt-0 mb-10 text-center" style="font-size:35px;">Sign in</h2>
+
+    <p class="mt-0 mb-20 text-center">Enter your email and password below to sign into SFM.</p>
+    <p class="text-center">
+        {exp:fbc:login
+            login_button_label="Login with Facebook"
+            logout_button_label="Facebook Logout"
+            button_size="large"
+            show_faces="false"
+            permissions="email"
+            return_when_logged_in="sfm-plus/index"
+            return_when_logged_out="home/index"
+            return_to_register="sfm-plus/join"
+            return_on_failure="notification/facebook"
+            max_rows="3"
+        }
+            {if fbc_logged_out == "y"}
+                {fbc_login_button}
+            {/if}
+                {if fbc_logged_in == "y"}
+                <a href="{path='logout'}">{logout_{language_code}}</a>
+            {/if}
+        {/exp:fbc:login}
+    </p>
+</div>
+
+<div class="entry-content mt-20">
+    {exp:member:login_form return="{current_url}" form_class="js_member_form"}
+    <p class="mb-0 mt-10"><label class="hide_form_labels" for="username">{sfm_email_{language_code}}</label>
+        <input type="text" id="username" name="username" placeholder="{sfm_username_{language_code}}"/></p>
+
+    <p class="mb-0 mt-0"><label for="password">{sfm_password_{language_code}}</label>
+        <input type="password" name="password" id="password" placeholder="{sfm_password_{language_code}}"/>
+        <small>
+            <a href="{base}members-area/forgot-password" title="{sfm_forgottenpassword_{language_code}}">{sfm_forgottenpassword_{language_code}}</a>
+        </small>
+    </p>
+    <p class="mb-0 mt-10">
+        <input class="radius button medium mb-0 js_login_button" type="submit" name="submit" value="Sign In" style="float:left;"/>
+        <a href="{base}members-area/" class="radius button join medium mb-0 js_login_button" style="margin-left:5px;">Join</a>
+    </p>
+    {/exp:member:login_form}
+</div>

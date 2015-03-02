@@ -1,0 +1,57 @@
+<aside class="sidebar c-1 hl-hide h-hide tp-hide">
+
+
+    {if logged_out}
+    <section class="intro marged mb-20 sfm-panel">
+
+        {if language_code == "ar"}
+        <h1>SFM Plus</h1>
+        <p style="font-size: 15px;
+            padding: 2px;
+            margin-top: 0;">كوني أول من يعلم بالعروض الرائعة، و القسائم الشرائية، و أين تستطعين أن توفري من خلال ماركاتك المفضلة. بالإضافة إلى حصولك على عروض حصرية للمشاركة في مسابقات للفوز بجوائز رائعة.</p>
+
+        {if:else}
+        <h1>Introducing SFM Plus</h1>
+        <p>SFM PLUS membership is exclusive to our subscribers. By registering you will be closer to the world of
+            fashion, celebrity, latest trends and style. </p>
+        <p style="font-size: 0.8em;margin-bottom: 0;">Be the first to receive our hand-picked offers, competitions, exclusive deals and in-store savings.
+            Share tips and advice via our forum, keep up to date with the latest trends and be at the forefront of what's new and what's
+            coming next.</p>
+        {!--
+        <p class="mb-0"><a href="/page/saudi-fashion-magazine/" class="button small radius mb-0">About us</a></p>
+        --}
+        {/if}
+
+        <a class="bottom-right-icon sfm-button" href="http://saudifashionmagazine.local/members-area/" data-reveal-id="join_modal">{join_{language_code}}</a>
+
+    </section>
+
+    {if:else}
+    <section class="intro marged mb-20 sfm-panel">
+
+        {if language_code == "ar"}
+        <h1>SFM Plus</h1>
+        <p>كوني أول من يعلم بالعروض الرائعة، و القسائم الشرائية، و أين تستطعين أن توفري من خلال ماركاتك المفضلة. بالإضافة إلى حصولك على عروض حصرية للمشاركة في مسابقات للفوز بجوائز رائعة.</p>
+
+        {if:else}
+        <h1>Introducing SFM Plus</h1>
+        <p style="font-size: 15px;
+            padding: 2px;
+            margin-top: 0;
+            ">SFM PLUS membership is exclusive to our subscribers. By registering you will be closer to the world of
+            fashion, celebrity, latest trends and style. </p>
+        <p style="font-size: 0.8em;margin-bottom: 0;">Be the first to receive our hand-picked offers, competitions, exclusive deals and in-store savings.
+            Share tips and advice via our forum, keep up to date with the latest trends and be at the forefront of what's new and what's
+            coming next.</p>
+        {!--
+        <p class="mb-0"><a href="/page/saudi-fashion-magazine/" class="button small radius mb-0">About us</a></p>
+        --}
+        {/if}
+        {if logged_out}
+        <a class="bottom-right-icon sfm-button" href="#">Share</a>
+        {/if}
+    </section>
+
+    {/if}
+
+</aside>

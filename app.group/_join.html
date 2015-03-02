@@ -1,0 +1,52 @@
+<section class="teaser text-center row">
+    <div class="col-xs-12">
+        <h3>{sharetowin_WantThisPrize_{language_code}}</h3>
+        <p>{sharetowin_WantThisPrizeDesc_{language_code}}</p>
+
+        {exp:user:register form:id="register_comp" required="username|password" error_page="sfm-plus/error"}
+        <div class="form-group text-center facebook-login">
+            {exp:fbc:login login_button_label="Sign in using Facebook" permissions="email|" return_on_failure="/members-area" button_size="large" } {if fbc_logged_out == "y"}{fbc_login_button}{/if} {if fbc_logged_in == "y"}Logged in through Facebook (<a href="{path='logout'}">Log Out</a>){/if} {/exp:fbc:login}
+        </div>
+
+        <div class="text-center">
+            <p>
+                {sharetowin_alreadyHaveAnAccount_{language_code}}<br class="visible-xs">
+                <strong>
+                    <a href="#" data-toggle="modal" data-target="#signin_modal">{sign_in_{language_code}}</a>
+                </strong>
+                {sharetowin_toEnter_{language_code}}<br><br class="visible-xs">
+                {sharetowin_orRegisterANewAccountBelow_{language_code}}
+            </p>
+        </div>
+
+        <div id="js_ShowForm" class="text-left" style="display: none;">
+            <div class="form-group">
+                <label for="username">{sharetowin_YourEmail_{language_code}}</label>
+                <input type="text" name="username" id="email" placeholder="{sharetowin_EmailPlaceHolder_{language_code}}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="password">{fg4_create_password_{language_code}}</label>
+                <input type="password" name="password" id="password" placeholder="{sharetowin_EnterAPassword_{language_code}}" class="js_revealer_field form-control" required>
+            </div>
+
+            {if language_code == 'en'}
+            <div class="checkbox">
+                <small>
+                    <label>
+                        <input type="checkbox" name="newsletter_terms" value="y"> {sharetowin_AcceptEmailTerms_{language_code}}
+                    </label>
+                </small>
+            </div>
+            {/if}
+            <input class="btn-lg btn btn-default btn-green btn-action" type="submit" name="submit" value="{sharetowin_SignUpToEnter_{language_code}}">
+        </div>
+
+        <input type="hidden" name="accept_terms" id="accept_terms" value="y">
+        <input type="hidden" name="page_url" id="page_url" value="{current_url}">
+
+        <div id="js_register_comp" class="clearfix mb-10 alert alert-warning text-left" style="display: none;font-size:13px;"></div>
+        <div id="js_clickShowForm" class="btn-lg btn btn-default btn-green btn-action">{sharetowin_RegisterToEnter_{language_code}}</div>
+        {/exp:user:register}
+    </div>
+</section>

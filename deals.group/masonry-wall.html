@@ -1,0 +1,7 @@
+<div class="data masonry mb-20">
+  {exp:channel:entries channel="entry" category="7" cache="yes" refresh="10"}
+  <a class="item masonry-brick" href="{site_url}deals/{url_title}">
+    <div class="wrap"><img src="{if entry_image:masonry_wall}{entry_image:masonry_wall}{if:else}/images/placeholders/deals/test_{count}.jpg{/if}"><p>{title}</p></div>
+  </a>
+  {/exp:channel:entries}
+</div>

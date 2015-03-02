@@ -1,0 +1,58 @@
+{embed="__includes/wrapper-bootstrap" body_class="sfmplus sub home"}
+
+{exp:partials:set name="opening_body"}
+<div id="fb-root"></div>
+<script src="/assets/js/fb_login.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="sections"}
+<section class="forgotpassword all mt-20 mb-20 g-all-c">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="row" {dir_lang}>
+                <div class="col-md-12 mt-10 mb-20">
+                    <header class="entry-header">
+                        <h1 class="section-header {if '{language_code}' == 'en'}text-left {if:else}text-right{/if} mb-0 pb-10">
+                            <span class="sign">You are now logged out</span> log back in?
+                        </h1>
+                    </header>
+                </div>
+            </div>
+
+            <div class="row clearfix" {dir_lang}>
+                <div class="col-md-6">
+                    <div class="entry-content mb-30">
+                        <div class="mb-30">
+                            {exp:member:login_form return="members-area"}
+                            <div class="label_padding">
+                                <p><label for="username">Your email:</label> <input type="text" id="username" name="username" style="width: 300px;" /></p>
+                                <p><label for="password">Your Password:</label> <input type="password" name="password" id="password" style="width: 300px" /></p>
+                            </div>
+
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="auto_login" id="auto_login" value="1" /> Auto-login on future visits?
+                                </label>
+                            </p>
+
+                            <p class="gamma">
+                                <a href="{path=members-area/forgot-password}/">Forgot Your Username or Password?</a>
+                            </p>
+
+                            <p>
+                                <input type="submit" name="submit" value="Login" class="radius button medium" />
+                            </p>
+                            {/exp:member:login_form}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    {embed="sfm-plus/_featured"}
+{/exp:partials:set}
+
+

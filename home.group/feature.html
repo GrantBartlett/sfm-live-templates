@@ -1,0 +1,17 @@
+{exp:channel:entries channel="entry" category_group="6" limit="1" sticky="no" status="{embed:status}"}
+<article class="main l-2c custom-layout">
+    <div class="c-1">
+        <a href="{base}articles/reading/{url_title}/" class="image-link"><img src="{entry_image:70_30_large}"></a>
+    </div>
+    <div class="c-2" {entry_dir_lng}>
+        <small class="author h-hide hl-hide d-hide">{published_{language_code}}
+            <time>{entry_date format="%j%S %F %Y"}</time>
+            {entry_author_{language_code}} {author}
+        </small>
+        <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+        <p class="hl-hide">
+            {entry_excerpt_lng}
+        </p>
+    </div>
+</article>
+{/exp:channel:entries}

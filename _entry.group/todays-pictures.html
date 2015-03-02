@@ -1,0 +1,30 @@
+<section class="sidebar-2col more-galleries mb-20 chunk">
+    <div class="drop-shadow">
+        {exp:channel:entries channel="entry" category="29" limit="1" dynamic="no" status="{embed:status}"}
+        {if total_results > 0}
+        <h1 class="section-header"><a href="{base}lookbooks/">{todays_pictures_{language_code}}</a></h1>
+        {/if}
+        {/exp:channel:entries}
+        {exp:channel:entries channel="entry" category="29" cache="yes" refresh="10" limit="{embed:limit}" dynamic="no" status="{embed:status}"}
+        {exp:grouper:start groupby="2" count="{count}" total="{total_results}"}
+        <div class="clear mb-10">
+            {/exp:grouper:start}
+            <article class="{switch='c-1|c-2'}">
+                <a href="{base}lookbooks/viewing/{url_title}/" class="image">
+                    <img src="/images/placeholders/140x105.gif" data-src="{entry_image:list_excerpt_image}" width="140" height="84" alt="">
+                    <img src="/themes/site_themes/saudifashion/gallery-icon.png" width="140" height="84" alt="" class="mask">
+                </a>
+
+                <p class="text">
+                    <a href="{base}lookbooks/viewing/{url_title}/">{entry_name_lng} -
+                      <strong>({entry_gallery limit="1"}{field_total_rows}{/entry_gallery} {pictures_{language_code}})</strong></a>
+                </p>
+
+                <p class="date" style="display: none">{entry_date format="%j %F %Y"}</p>
+            </article>
+            {exp:grouper:end groupby="2" count="{count}" total="{total_results}"}
+        </div>
+        {/exp:grouper:end}
+        {/exp:channel:entries}
+    </div>
+</section>

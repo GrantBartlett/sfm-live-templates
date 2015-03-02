@@ -1,0 +1,19 @@
+{exp:channel:entries channel="entry" category_group="2" category="28" cache="yes" refresh="10" offset="9" status="{embed:status}"}
+
+{exp:grouper:start groupby="4" count="{count}" total="{total_results}"}
+<div class="three-clear l-4c">
+    {/exp:grouper:start}
+
+    <article class="tertiary {switch='c-1|c-2|c-3|c-4'} video">
+        <a href="{site_url}videos/watching/{url_title}/" class="image">
+            <img src="{entry_image:3_col_large}" style="width: 100%">
+            <span class="icon bottom-right-icon video small"></span>
+        </a>
+        <h1 class="gamma"><a href="{site_url}videos/watching/{url_title}/">{entry_name_{language_code}}</a></h1>
+    </article>
+
+    {exp:grouper:end groupby="4" count="{count}" total="{total_results}"}
+</div>
+{/exp:grouper:end}
+
+{/exp:channel:entries}

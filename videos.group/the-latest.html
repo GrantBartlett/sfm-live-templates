@@ -1,0 +1,33 @@
+<div class="c-1">
+    <article class="secondary mb-40">
+        {exp:channel:entries channel="entry" category_group="2" category="28" cache="yes" refresh="10" limit="1" status="{embed:status}"}
+        <div class="video_container js_adaptive-video" {entry_dir_lng}>
+            <iframe width="675" height="380" src="{youtube_video_link}" frameborder="0" allowfullscreen class="mb-10"></iframe>
+            <h1><a href="{base}videos/watching/{url_title}/">{entry_name_lng}</a></h1>
+
+            <p>{entry_excerpt_lng}</p>
+        </div>
+        {/exp:channel:entries}
+    </article>
+
+    {exp:channel:entries channel="entry" category_group="2" category="28" cache="yes" refresh="10" limit="4" offset="5" status="{embed:status}"}
+
+    {exp:grouper:start groupby="2" count="{count}" total="{total_results}"}
+    <div class="clear">
+        {/exp:grouper:start}
+
+        <article class="tertiary halves {switch='left|right'}" {entry_dir_lng}>
+        <a href="{base}videos/watching/{url_title}/" class="image">
+            <img src="{entry_image:3_col_large}" style="width: 100%">
+            <span class="icon bottom-right-icon video"></span>
+        </a>
+
+        <h1 class="gamma mb-20"><a href="{base}videos/watching/{url_title}/">{entry_name_lng}</a></h1>
+        </article>
+
+        {exp:grouper:end groupby="2" count="{count}" total="{total_results}"}
+    </div>
+    {/exp:grouper:end}
+
+    {/exp:channel:entries}
+</div>

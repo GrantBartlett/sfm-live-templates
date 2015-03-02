@@ -1,0 +1,89 @@
+<section class="teaser">
+    <h3 class="mt-30 text-center">{sharetowin_WantThisPrize_{language_code}}</h3>
+    <p class="mt-0 text-center">{sharetowin_WantThisPrizeDesc_{language_code}}</p>
+
+    {exp:user:register form:id="register_comp" required="username|password" error_page="sfm-plus/error"}
+    <div class="form-group text-center facebook-login">
+        {exp:fbc:login login_button_label="Sign in using Facebook" permissions="email|" return_on_failure="/members-area" button_size="large" } {if fbc_logged_out == "y"}{fbc_login_button}{/if} {if fbc_logged_in == "y"}Logged in through Facebook (<a href="{path='logout'}">Log Out</a>){/if} {/exp:fbc:login}
+    </div>
+
+    <div class="text-center">
+        <p class="text-center">{sharetowin_alreadyHaveAnAccount_{language_code}} <strong><a href="/members-area/" data-reveal-id="signin_modal" style="text-decoration: underline;font-size: 1em;">{sign_in_{language_code}}</a></strong> {sharetowin_toEnter_{language_code}}<br>
+        {sharetowin_orRegisterANewAccountBelow_{language_code}}
+        </p>
+    </div>
+
+    <div id="js_ShowForm" style="display: none;">
+        <div class="form-group">
+            <label for="username">{sharetowin_YourEmail_{language_code}}</label>
+            <input type="text" name="username" id="email" placeholder="{sharetowin_EmailPlaceHolder_{language_code}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="password">{fg4_create_password_{language_code}}</label>
+            <input type="password" name="password" id="password" placeholder="{sharetowin_EnterAPassword_{language_code}}" class="js_revealer_field form-control" required>
+        </div>
+
+        {if language_code == 'en'}
+        <div class="checkbox">
+            <small>
+                <label>
+                    <input type="checkbox" name="newsletter_terms" value="y"> {sharetowin_AcceptEmailTerms_{language_code}}
+                </label>
+            </small>
+        </div>
+        {/if}
+
+        <input class="btn-lg btn btn-default btn-green btn-action" type="submit" name="submit" value="{sharetowin_SignUpToEnter_{language_code}}">
+    </div>
+
+    <input type="hidden" name="accept_terms" id="accept_terms" value="y">
+    <input type="hidden" name="page_url" id="page_url" value="{current_url}">
+
+    <div id="js_register_comp" class="clearfix mb-10 alert alert-warning" style="display: none;font-size:13px!important;"></div>
+
+    <div id="js_clickShowForm" class="btn-lg btn btn-default btn-green btn-action">{sharetowin_RegisterToEnter_{language_code}}</div>
+    {/exp:user:register}
+</section>
+
+<script type="text/javascript">
+    // prepare the form when the DOM is ready
+    $(function () {
+        $("#js_clickShowForm").click('on',function(){
+            $("#js_ShowForm").fadeIn(500);
+            $("#js_clickShowForm").hide();
+        });
+
+        $('#register_comp').parsley();
+
+        var options = {
+            target: '#js_register_comp',   // target element(s) to be updated with server response
+            success: showResponseJoinComp  // post-submit callback
+        };
+
+        // bind to the form's submit event
+        $('#register_comp').submit(function () {
+            // inside event callbacks 'this' is the DOM element so we first
+            // wrap it in a jQuery object and then invoke ajaxSubmit
+            $(this).ajaxSubmit(options);
+            // !!! Important !!!
+            // always return false to prevent standard browser submit and page navigation
+            return false;
+        });
+
+    });
+
+    function showResponseJoinComp(responseText, statusText, xhr, $form)  {
+        $("#js_register_comp").fadeIn(500);
+
+        if(responseText['success'] === true)
+        {
+            // Carry on and notify user
+            $("#js_register_comp").html("{sharetowin_YouAreNowRegistered_{language_code}}");
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+
+            // Registered, reload the page
+            window.location.reload();
+        }
+    }
+</script>

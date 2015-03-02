@@ -1,0 +1,120 @@
+{exp:member:custom_profile_data}
+    {exp:channel:entries channel="offers" url_title="{last_segment}" show_future_entries="yes" show_expired="yes" dynamic="no"}
+        {if "{offer_custom_fields}" == "y"}
+            <style type="text/css">
+                #js_enter_now{
+                    display:none;
+                }
+            </style>
+            {offer_form_elements}
+            <div id="profile-instructions" class="teaser text-left">
+                <div id="js_toggle_details" class="text-center">
+                    <h3>{sharetowin_step1of2_{language_code}}</h3>
+                    <p>{sharetowin_step1of2_desc_{language_code}}</p>
+
+                    {exp:user:edit form:class="custom"}
+                        <div class="form-group">
+                            <label for="first_name">{sharetowin_FullName_{language_code}}</label>
+                            <input type="text" name="first_name" id="first_name" value="{first_name}" placeholder="E.g Joe Bloggs" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">{sfm_city_{language_code}}</label>
+                            <input type="text" name="location" value="{location}" placeholder="{sfm_city_{language_code}}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telephone">{sfm_telephone_{language_code}}</label>
+                            <input type="text" name="telephone" value="{telephone}" placeholder="{sharetowin_enteramobile_{language_code}}" class="form-control" required>
+                        </div>
+
+                        <button type="submit" name="submit" value="Next" class="btn-green btn-action mt-10 mb-10">
+                            {fg4_next_{language_code}}
+                        </button>
+                    {/exp:user:edit}
+                </div>
+            </div>
+            {/offer_form_elements}
+        {/if}
+    {/exp:channel:entries}
+
+    <section id="js_update_profile">
+    {exp:freeform:form
+        form:id="comp_{exp:stash:freeform_id}"
+        form_id="{exp:stash:freeform_id}"
+        prevent_duplicate_on="hidden_email"
+        user_email_field="hidden_email"
+        notify_user="yes"
+        parse="inward"
+        inline_errors="yes"
+    }
+        {freeform:field:hidden_first_name"}
+        {freeform:field:hidden_city"}
+        {freeform:field:hidden_telephone"}
+        {freeform:field:hidden_email"}
+        {freeform:field:hidden_screenname"}
+        {freeform:field:hidden_share_image"}
+        {freeform:field:competition_image"}
+        {freeform:field:page_title"}
+        {freeform:field:competition_title"}
+        {freeform:field:competition_url"}
+
+        {if "{embed:customQuestion}" == "y"}
+            <div class="entered" style="display: none">
+                <input type="text" name="competition_answer" value="" id="freeform_competition_answer" maxlength="350" placeholder="Enter your answer" class="form-control" required>
+            </div>
+        {/if}
+
+        <div id="js_shared" {if embed:canShare == 'yes'}style="display: none;"{/if} class="text-right">
+            {exp:freeform:entries form_id="{embed:form_id}" author_id="{logged_in_member_id}" parse="inward" limit="1"}
+                <div class="btn-lg btn btn-default btn-green btn-action">
+                    {sharetowin_YouEntered_{language_code}}
+                </div>
+
+                <small>
+                    {sharetowin_YouEnteredOn_{language_code}} {freeform:entry_date format="%F %j, %Y at %g:%i %a"}
+                </small>
+
+                <div id="js_enter_message" class="clearfix alert alert-warning" style="display: none;font-facebookze:13px;"></div>
+
+                {if freeform:no_results}
+                    <style type="text/css">
+                        .entered {display:block!important;}
+                    </style>
+                    <button id="js_enter_now" type="submit" name="submit" value="Next" class="btn-lg btn btn-default btn-green btn-action">
+                        {enter_now_{language_code}}
+                    </button>
+                {/if}
+            {/exp:freeform:entries}
+            <br>
+        </div>
+
+        {if freeform:no_results}
+        <p>Sorry, this competition is not ready yet!</p>
+        {/if}
+    {/exp:freeform:form}
+</section>
+
+{if embed:canShare == 'yes'}
+    <div class="share-competition">
+        <div class="panel panel-default panel-dark text-center">
+            <div class="panel-heading">
+                <h3>{sharetowin_ShareWithFriendsToEnter_{language_code}}</h3>
+            </div>
+
+            <div class="panel-body">
+                <div id="js_sharelinks">
+                    <a class="btn facebook-share" id="facebook-share" style="text-transform: uppercase;">{sharetowin_Share_{language_code}}</a>
+                    <a href="https://twitter.com/intent/tweet?text={embed:tweet_{language_code}}&url={embed:tweet_bitly_{language_code}}&hashtags={embed:tweet_hashtag}" class="btn twitter-share" target="_blank" style="text-transform: uppercase;"><i class="fa fa-twitter fa-lg fa-fw"></i> {sharetowin_Tweet_{language_code}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-right">
+        <button id="js_help" type="submit" class="btn-lg btn btn-default btn-red" style="opacity: 0.7;">
+            {enter_now_{language_code}} <span class="glyphicon glyphicon-lock"></span>
+        </button>
+    </div>
+{/if}
+{/exp:member:custom_profile_data}

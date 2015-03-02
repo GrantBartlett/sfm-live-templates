@@ -1,0 +1,20 @@
+<html>
+<head>
+
+</head>
+<body>
+<div  id="content">Loading...</div>
+</body>
+</html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  $(function () {
+    $.ajax({
+      url:"/members-area/ajax_response/",
+      success:function(result){
+        $("#content").html(result);
+      }
+    });
+  });
+</script>

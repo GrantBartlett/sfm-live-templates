@@ -1,0 +1,65 @@
+{embed="__includes/wrapper" body_class="content members-area"}
+
+{exp:partials:set name="page_title"}{heading}{/exp:partials:set}
+
+{exp:partials:set name="first_head"}{meta_refresh}{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+    <section class="content-section">
+
+        <h1 class="section-header {if language_code == "ar"}text-right{if:else}text-left{/if}">Facebook Login/Register Error</h1>
+
+        <div class="entry-content">
+
+            {exp:fbc:login_status}
+            <p>
+                Logged into EE?
+                {if fbc_logged_into_ee == "y"}
+                Yes
+                {if:else}
+                No
+                {/if}
+            </p>
+            <p>
+                Logged into Facebook?
+                {if fbc_logged_into_facebook == "y"}
+                Yes
+                {if:else}
+                No
+                {/if}
+            </p>
+            <p>
+                Logged into Facebook and EE?
+                {if fbc_logged_into_ee == "y" AND fbc_logged_into_facebook == "y"}
+                Yes
+                {if:else}
+                No
+                {/if}
+            </p>
+            <p>
+                Facebook and EE accounts synced?
+                {if fbc_logged_into_facebook_and_ee == "y"}
+                Yes
+                {if:else}
+                No
+                {/if}
+            </p>
+            {/exp:fbc:login_status}
+
+            <p>{link}</p>
+
+            <div class="problems_notification entry-content">
+                <h2><i class="icon-bell-alt"></i> {sfm_havingproblems_{language_code}}</h2>
+                <p>{sfm_havingproblems_message_{language_code}}</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{/exp:partials:set}

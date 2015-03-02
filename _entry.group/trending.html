@@ -1,0 +1,56 @@
+<ul id="trending-content">
+  <li class="box-heading"><h2>Trending</h2></li>
+
+    {if language_code == "ar"}
+
+        {exp:channel:entries
+            channel="entry"
+            limit="14"
+            search:entry_trending="yes"
+            search:entry_name_ar="not IS_EMPTY"
+            category="{embed:category}"
+            status="Arabic Only|Open"}
+            <li class="{switch='first-item|||||||l-show|hr-show|hr-show|hr-show|hr-show|hr-show|hr-show'}" {if language_code == "ar" AND entry_name_ar == ""}dir="ltr"{/if}>
+            {categories show_group="2" limit="1"}
+            {if category_name == "lookbook"}
+            <small style="text-transform: capitalize"><a href="{base}lookbooks/">{lookbook_{language_code}}</a></small><br>
+            <a href="{base}lookbooks/viewing/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {if:elseif category_name == "video"}
+            <small style="text-transform: capitalize"><a href="{base}videos/">{video_{language_code}}</a></small><br>
+            <a href="{base}videos/watching/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {if:else}
+            <small style="text-transform: capitalize"><a href="{base}articles/">{article_{language_code}}</a></small><br>
+            <a href="{base}articles/reading/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {/if}
+            {/categories}
+            </li>
+        {/exp:channel:entries}
+
+    {if:else}
+
+        {exp:channel:entries
+            channel="entry"
+            limit="14"
+            search:entry_trending="yes"
+            search:entry_name_en="not IS_EMPTY"
+            category="{embed:category}"
+            status="English Only|Open"}
+            <li class="{switch='first-item|||||||l-show|hr-show|hr-show|hr-show|hr-show|hr-show|hr-show'}" {if language_code == "ar" AND entry_name_ar == ""}dir="ltr"{/if}>
+            {categories show_group="2" limit="1"}
+            {if category_name == "lookbook"}
+            <small style="text-transform: capitalize"><a href="{base}lookbooks/">{lookbook_{language_code}}</a></small><br>
+            <a href="{base}lookbooks/viewing/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {if:elseif category_name == "video"}
+            <small style="text-transform: capitalize"><a href="{base}videos/">{video_{language_code}}</a></small><br>
+            <a href="{base}videos/watching/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {if:else}
+            <small style="text-transform: capitalize"><a href="{base}articles/">{article_{language_code}}</a></small><br>
+            <a href="{base}articles/reading/{url_title}/">{if (language_code == "ar" && entry_name_ar == "") || language_code == "en"}{entry_name_en}{if:else}{entry_name_ar}{/if}</a>
+            {/if}
+            {/categories}
+            </li>
+        {/exp:channel:entries}
+
+    {/if}
+</ul>
+

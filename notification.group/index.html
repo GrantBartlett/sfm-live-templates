@@ -1,0 +1,29 @@
+{embed="__includes/wrapper" body_class="content members-area"}
+
+{exp:partials:set name="page_title"}{heading}{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+    <section class="content-section">
+
+        <h1 class="section-header">{heading}</h1>
+
+        <div class="entry-content">
+            <p>{content}</p>
+
+            <p>{link}</p>
+
+            <div class="problems_notification entry-content">
+                <h2><i class="icon-bell-alt"></i> {sfm_havingproblems_{language_code}}</h2>
+                <p>{sfm_havingproblems_message_{language_code}}</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{/exp:partials:set}

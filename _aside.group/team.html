@@ -1,0 +1,19 @@
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+    <section class="advert tp-hide roundicons_container">
+        {embed="_entry/follow"}
+    </section>
+
+    <section class="sidebar-1col mt-20">
+        <header>
+            <h1>Meet the SFM team</h1>
+        </header>
+        {exp:channel:entries channel="team" dynamic="no"}
+        <article>
+            <p class="c-1 mt-5"><a href="{base}team/member/{url_title}/"><strong>{team_member_name_{language_code}}</strong><br>{team_member_tiny_excerpt_{language_code}}</a></p>
+            <a class="c-2" href="{base}team/member/{url_title}/"><img src="{team_member_image:150x112}"></a>
+        </article>
+        {/exp:channel:entries}
+    </section>
+
+</aside>

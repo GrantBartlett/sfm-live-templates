@@ -1,0 +1,21 @@
+<?php
+$isAjax = false;
+if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest' ) {
+  // I'm AJAX!
+  $isAjax = true;
+}
+
+if ($isAjax === false) {
+  echo 'request is not via ajax';
+?>
+{embed="__includes/wrapper" body_class="sfmplus members-area"}
+{exp:partials:set name="page_title"}SFM+ Members Area{/exp:partials:set}
+{exp:partials:set name="content"}
+Not ajax...
+{/exp:partials:set}
+<?php
+}
+if ($isAjax === true) {
+  echo 'request is via ajax';
+}
+?>

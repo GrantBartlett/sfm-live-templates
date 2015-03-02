@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Screen test</title>
+        <style>
+          body {margin: 2em}
+          img {max-width: 100%;}
+          figure {
+            border-bottom: 1px solid #CCC;
+            padding: 20px 0;
+            margin: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <h2>Screen size: <span id="screensize"></span></h2>
+
+        <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+("devicePixelRatio" in window ? ","+devicePixelRatio : ",1")+'; path=/';</script>
+
+        <script>
+          // required by Adaptive image
+          document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';
+
+          var ss = document.getElementById('screensize');
+          ss.innerHTML = Math.max(screen.width,screen.height);
+
+          function imageDims (imageId, ele) {
+            var img = document.getElementById(imageId),
+                imageUrl = img.src,
+                width = img.offsetWidth,
+                height = img.offsetHeight,
+                ele = document.getElementById(ele),
+                xhr = new XMLHttpRequest();
+            xhr.open('HEAD', imageUrl, true);
+            xhr.onreadystatechange = function(){
+              if ( xhr.readyState == 4 ) {
+                if ( xhr.status == 200 ) {
+                  ele.innerHTML = 'Resized dimensions: ' + width + ' x ' + height + 'px | size: ' + (xhr.getResponseHeader('Content-Length')/1024).toFixed(2) + 'KB'
+                } else {ele.innerHTML = 'Error'};
+              }
+            };
+            xhr.send(null);
+          }
+        </script>
+
+        <h2>Device:
+          {if '{exp:detect_mobile:type}' == "tablet"}
+          Tablet
+          {if:elseif '{exp:detect_mobile:type}' == "phone"}
+          Mobile phone
+          {if:else}
+          Desktop or other
+          {/if}
+        </h2>
+
+        <h2>Images:</h2>
+        <figure>
+          <h3>Image 1</h3>
+          <img id="img1" src="/images/placeholders/image-resize-test-bananaapples.jpg">
+          <figcaption>
+            Original dimensions: 668 x 444px | size: 120KB
+            <hr>
+            <span id="rep1"></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <h3>Image 2</h3>
+          <img id="img2" src="/images/placeholders/image-resize-test-mountains.jpg">
+          <figcaption>
+            Original dimensions: 1024px x 768px | size: 265KB
+            <hr>
+            <span id="rep2"></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <h3>Image 3</h3>
+          <img id="img3" src="/images/placeholders/image-resize-test-beach.jpg">
+          <figcaption>
+            Original dimensions: 1920px x 1080px | size: 564KB
+            <hr>
+            <span id="rep3"></span>
+          </figcaption>
+        </figure>
+      <script>
+        setTimeout(function () {
+          imageDims('img1', 'rep1');
+          imageDims('img2', 'rep2');
+          imageDims('img3', 'rep3');
+        }, 600)
+      </script>
+      </body>
+    </html>

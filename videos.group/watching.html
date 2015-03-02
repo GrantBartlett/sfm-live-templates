@@ -1,0 +1,82 @@
+{embed="__includes/wrapper" body_class="videos watching"}
+
+{exp:partials:set name="page_title"}Videos{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+  <section class="content-section js_adaptive-video">
+    <div class="c-1">
+      {exp:channel:entries channel="entry" category_group="2" category="28" url_title="{last_segment}" status="{entry_status_lng_all}"}
+      <article id="post-id{entry_id}" class="secondary">
+        <header class="entry-header">
+          <h3 class="category"><a href="{site_url}videos/" title="View all entries in Videos">Videos</a> &amp; <a href="{site_url}lookbooks/" title="View all entries in Pictures">Pictures</a></h3>
+          <h1 class="entry-title">{entry_name_lng}</h1>
+          {embed="_entry/meta_info" url_title="{url_title}" entry_date="{entry_date format='%F %j, %Y'}" author="{author}" type="video" title="{entry_name_lng}"}
+        </header>
+        <div class="entry-content">
+          <div class="video_container js_adaptive-video">
+              <iframe width="675" height="380" src="{youtube_video_link}" frameborder="0" allowfullscreen class="mb-10"></iframe>
+          </div>
+
+          <p>{entry_description_lng}</p>
+          <p>{entry_content_lng}</p>
+
+        </div>
+      </article>
+      {/exp:channel:entries}
+    </div>
+  </section>
+
+  {embed="__includes/disqus"}
+  
+  <hr>
+
+  <section class="content-section l-30-30-30c hide-for-print">
+    <h1 class="section-header">You might also like...</h1>
+    {embed="videos/you-might-also-like" status="{entry_status_lng}"}
+  </section>
+
+  <section class="signup-one advert">
+    <a href="#"><img src="/images/assets/house-ad-join-today.jpg" style="width: 100%"></a>
+  </section>
+
+  <section class="content-section hide-for-print">
+
+    <h1 class="section-header">Latest Videos</h1>
+
+    {embed="videos/latest-videos" status="{entry_status_lng}"}
+
+  </section>
+  
+  {embed="articles/related" status="{entry_status_lng}"}
+
+</div>
+
+<div id="myModal" class="reveal-modal small send-to-friend"></div>
+<div id="shareModal" class="reveal-modal"></div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+  <div class="h-hide hl-hide tp-hide">
+
+    <section class="mb-30">
+      <a href="http://instagram.com/saudifashionmag/"><img src="/images/adverts/instagram.gif"></a>
+    </section>
+
+      {embed="_entry/todays-videos" status="{entry_status_lng}" limit="8"}
+
+      {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="8"}
+
+  </div>
+
+</aside>
+{/exp:partials:set}
+
+{exp:partials:set name="footer_last"}
+<script src="/assets/js/adaptive_video.js"></script>
+{/exp:partials:set}

@@ -1,0 +1,74 @@
+<?php
+$user_id = '406137702';
+$access_token = '406137702.732fddc.de133e61313547c2b884ee4686b90bde';
+// Output: https://api.instagram.com/v1/users/406137702/media/recent/?access_token=406137702.732fddc.de133e61313547c2b884ee4686b90bde
+
+$url = "https://api.instagram.com/v1/users/$user_id/media/recent/?access_token=$access_token";
+$json = file_get_contents($url);
+$data = json_decode($json, TRUE);
+$data = $data['data'];
+$f_count = 1;
+?>
+
+<style>
+    .instagram-content {
+        background: #171717;
+        padding: 15px;
+    }
+    .instagram-content ul {
+        margin: 0!important;
+        padding: 0!important
+    }
+
+    .instagram-content ul li {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .instagram-content ul li a {
+        color: #E5E5E5;
+    }
+
+    .instagram-content ul li a:hover {
+        color: #F45147;
+    }
+
+    .instagram-sidebar .article-wrapper {
+        position: relative;
+    }
+</style>
+<section class="mb-20 mt-20 instagram-sidebar">
+    <header>
+        <h1>Live from Instagram</h1>
+    </header>
+
+    <?php foreach ($data as $k => $v) : ?>
+        <?php if ($k < '1') : ?>
+
+            <div class="article-wrapper">
+                <a href="<?= $v['link'] ?>" class="image" target="_blank">
+                    <img src="<?= $v['images']['low_resolution']['url'] ?>" width="306" height="306"> </a>
+
+                <div class="instagram-content">
+                    <div class="m-bot-0 m-top-0 clearfix">
+
+                        <ul class="list-inline">
+                            <li>
+                                <a href="<?= $v['link'] ?>" target="_blank">
+                                    <i class="fa fa-heart fa-lg"></i> <span style="font-size:14px;"><?= $v['likes']['count']; ?> likes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $v['link'] ?>" target="_blank">
+                                    <i class="fa fa-comments fa-lg"></i> <span style="font-size:14px;"><?= $v['comments']['count']; ?> comments</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <?php if ($f_count == '2') break; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</section>

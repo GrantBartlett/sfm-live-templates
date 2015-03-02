@@ -1,0 +1,51 @@
+{embed="__includes/wrapper" body_class="videos"}
+
+{exp:partials:set name="page_title"}Videos{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<section class="l-full-4c featured-video mb-20">
+    <h1 class="section-header">Featured Video</h1>
+    {embed="videos/featured" status="{entry_status_lng}"}
+</section>
+
+{ad_sfm_plus_banner_white}
+
+<div id="content">
+  <section class="content-section l-70-30c mb-30">
+    <h1 class="section-header">Latest Videos</h1>
+    {embed="videos/the-latest" status="{entry_status_lng}"}
+    <div class="c-2">
+      {embed="_entry/trending" category="28|29"}
+    </div>
+
+  </section>
+
+  <section class="content-section">
+
+    {embed="videos/list" status="{entry_status_lng}"}
+
+  </section>
+
+</div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+  <div class="h-hide hl-hide tp-hide">
+
+      {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="26"}
+
+      {!--embed="_entry/todays-pictures" status="{entry_status_lng}"--}
+
+  </div>
+
+</aside>
+{/exp:partials:set}
+
+{exp:partials:set name="footer_last"}
+<script src="/assets/js/adaptive_video.js"></script>
+{/exp:partials:set}

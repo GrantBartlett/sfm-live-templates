@@ -1,0 +1,31 @@
+{!--
+
+THIS TEMPLATE IS NOT BEING USED - BUT IS USEFUL FOR DEBUGGING
+
+--}
+
+<?php
+
+
+
+
+function simple_encrypt($text)
+{
+    $salt ='098123132iidjais';
+    return trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $salt, $text, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
+}
+
+function simple_decrypt($text)
+{
+    $salt ='098123132iidjais';
+    return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $salt, base64_decode($text), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+}
+
+?>
+
+
+<p>Encrypted username/email: <?php $enc = simple_encrypt($_GET['user']); echo $enc ?></p>
+
+<p>URL ENCODED Encrypted username/email: <?php $ue_enc = urlencode(simple_encrypt($_GET['user'])); echo $ue_enc ?></p>
+
+<a href="/pos/receiver/?user=<?= urlencode($enc); ?>">Go to page</a>

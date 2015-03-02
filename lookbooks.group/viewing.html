@@ -1,0 +1,92 @@
+{embed="__includes/wrapper" body_class="lookbooks viewing"}
+
+{exp:partials:set name="page_title"}Lookbook{/exp:partials:set}
+
+{exp:channel:entries
+    channel="entry"
+    category_group="2"
+    category="29"
+    url_title="{segment_3}"
+    cache="yes"
+    refresh="10"
+    status="{entry_status_lng_all}"
+    disable="member_data|pagination"
+}
+{exp:partials:set name="meta_og"}
+<meta property="og:title" content="{entry_name_{language_code}}" />
+<meta property="og:description" content="{entry_excerpt_{language_code}}" />
+{/exp:partials:set}
+<script>
+    var category = "{categories limit="1" show_group="6"}{category_name_en}{/categories}";
+    $('body').attr('data-category', category.toLowerCase());
+</script>
+{/exp:channel:entries}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+    <section class="content-section">
+        <div class="c-1">
+
+            {exp:channel:entries channel="entry" category_group="2" category="29" url_title="{last_segment}" cache="yes" refresh="10" status="{entry_status_lng_all}"}
+            <article id="post-id{entry_id}" class="secondary">
+                <header class="entry-header">
+                    <h3 class="category"><a href="{base}videos/" title="View all entries in Videos">{videos_{language_code}}</a> &amp; <a
+                          href="{base}lookbooks/" title="View all entries in Pictures">{pictures_{language_code}}</a></h3>
+
+                    <h1 class="entry-title">{entry_name_lng}</h1>
+
+                    {embed="_entry/meta_info" url_title="{url_title}" entry_date="{entry_date format='%F %j, %Y'}" author="{author}" type="lookbook" title="{entry_name_lng}"}
+                </header>
+
+                {lookbook}
+
+                {embed="__includes/disqus"}
+
+            </article>
+            {/exp:channel:entries}
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="content-section l-30-30-30c hide-for-print">
+        <h1 class="section-header">{you_might_also_like_{language_code}}</h1>
+        {embed="lookbooks/you-might-also-like" status="{entry_status_lng}"}
+    </section>
+
+    {ad_sfm_plus_banner_black}
+
+    <section class="content-section hide-for-print">
+
+        <h1 class="section-header">{the_latest_{language_code}}</h1>
+
+        {embed="lookbooks/the-latest" status="{entry_status_lng}"}
+
+    </section>
+
+</div>
+
+<div id="myModal" class="reveal-modal small send-to-friend"></div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+    <div class="h-hide hl-hide tp-hide">
+
+        <section class="mb-30">
+          <a href="http://instagram.com/saudifashionmag/"><img src="/images/adverts/instagram.gif"></a>
+        </section>
+
+        {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="14"}
+
+        {embed="_entry/todays-videos" status="{entry_status_lng}"}
+
+    </div>
+
+</aside>
+{/exp:partials:set}

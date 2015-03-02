@@ -1,0 +1,89 @@
+{!-- delete me --}
+{embed="__includes/wrapper" body_class="home"}
+
+{exp:partials:set name="page_title"}Saudi Fashion Magazine | Fashion, News, Culture, Style, Beauty & More{/exp:partials:set}
+{exp:partials:set name="meta_keywords"}Fashion, Lifestyle, Style, Health, Beauty, Technology, News{/exp:partials:set}
+{exp:partials:set name="meta_description"}The online luxury lifestyle magazine for the Middle East that brings a unique mix of fashion, lifestyle, beauty and technology from across the globe.{/exp:partials:set}
+
+
+
+{exp:partials:set name="aside-left"}
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+  {!-- HIDE FROM HANDHELD, HANDHELD LANDSCAPE, TABLET PORTRAIT --}
+  <div class="h-hide hl-hide tp-hide">
+    {embed="home/slideshow"}
+
+    {embed="_aside/facebook-pages"}
+
+    {embed="_aside/instagram"}
+
+    <section class="advert tp-hide roundicons_container mb-20">
+        {embed="_entry/follow"}
+    </section>
+
+    {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="4"}
+
+    {embed="_entry/todays-videos" status="{entry_status_lng}" limit="4"}
+
+    {embed="articles/tabs-most-read-most-emailed" status="{entry_status_lng}"}
+  </div>
+</aside>
+{/exp:partials:set}
+
+{exp:partials:set name="sections"}
+    {embed="home/_ticker"}
+{/exp:partials:set}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+    {embed="home/feature-slides" status="{entry_status_lng}" category="5|28"}
+
+    {embed="home/fashion-fix-4col"}
+
+    <section class="content-section">
+        {embed="home/4-col-articles" status="{entry_status_lng}"}
+    </section>
+
+    <hr>
+
+    <section class="content-section  l-70-30c">
+        {embed="home/70_30_articles" status="{entry_status_lng}"}
+    </section>
+
+    {ad_sfm_plus_banner_white}
+
+    <section class="content-section l-70-30c">
+
+        <h1 class="section-header">{video_and_pictures_{language_code}}</h1>
+
+        <div class="c-1">
+            {embed="home/video" status="{entry_status_lng}"}
+        </div>
+
+        <div class="c-2">
+            {embed="_entry/trending"}
+        </div>
+
+    </section>
+</div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+<script src="/assets/js/banner.js"></script>
+<script src="/assets/js/feature-slider.js"></script>
+<script src="/assets/js/ff-slides.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="js_pageload"}
+// Required by home
+HomeBanner.init();
+Slider.init();
+FfSlides.init();
+{/exp:partials:set}
+
+{exp:partials:set name="footer_last"}
+<script src="/assets/js/adaptive_video.js"></script>
+{/exp:partials:set}

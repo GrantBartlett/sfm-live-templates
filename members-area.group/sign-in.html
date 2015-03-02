@@ -1,0 +1,39 @@
+{if logged_in}
+    {redirect="members-area/"}
+{/if}
+
+{embed="__includes/wrapper-bootstrap" body_class="sfmplus sub home"}
+
+{exp:partials:set name="opening_body"}
+<div id="fb-root"></div>
+<script src="/assets/js/fb_login.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="sections"}
+
+<section class="forgotpassword all mt-20 mb-20 g-all-c">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="row" {dir_lang}>
+                <div class="col-md-12 mt-10 mb-20">
+                    <header class="entry-header">
+                        <h1 class="section-header {if '{language_code}' == 'en'}text-left {if:else}text-right{/if} mb-0 pb-10">
+                            <span class="sign">{membersarea_SignIn_{language_code}}</span> to your SFM account
+                        </h1>
+                    </header>
+                </div>
+            </div>
+
+            <div class="row clearfix" {dir_lang}>
+                <div class="col-md-12">
+                    <div class="entry-content mb-30">
+                       {embed="members-area/_sign-in-form"}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{/exp:partials:set}

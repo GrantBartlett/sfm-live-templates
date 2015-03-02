@@ -1,0 +1,104 @@
+{embed="__includes/wrapper" body_class="shopping sfmplus content sub" nav_active="sfm-plus"}
+
+{exp:partials:set name="page_title"}Shopping{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+{embed="sfm-plus/header"}
+
+<div id="content">
+
+    {!-- catch shopping uri without further segments --}
+    {if segment_2 == ''}
+      <section class="content-section">
+      <h1 class="section-header">Malls</h1>
+      {embed="_mall/list"}
+      </section>
+    {/if}
+
+    {exp:switchee variable = "{segment_2}" parse="inward"}
+
+      {case value="malls"}
+        <section class="content-section">
+          <h1 class="section-header">Malls</h1>
+          {embed="_mall/list" search_filter="{segment_4}"}
+        </section>
+      {/case}
+
+      {case value="mall"}
+
+        {if segment_3 != ''}
+          {embed="_mall/detail" url_title="{segment_3}"}
+        {if:else}
+          <section class="content-section">{embed="_mall/list"}</section>
+        {/if}
+      {/case}
+
+      {case value="brands"}
+        <section class="content-section">
+          <h1 class="section-header">Brands</h1>
+          {embed="_brand/category"}
+        </section>
+        <hr>
+        <section class="content-section">
+          <div class="three-clear l-4c">
+            {embed="_brand/list-image"
+              class="tertiary brand mb-20"
+              orderby="title"
+              sort="asc"
+              alternate="c-1|c-2|c-3|c-4"
+              count="{count}"
+              link="/shopping/brand/{url_title}/"
+              link_title="{title}"
+              img_url="{brand_logo}"
+              img_alt="{title}"}
+          </div>
+        </section>
+      {/case}
+
+      {case value="brand"}
+          {embed="_brand/detail" url_title="{segment_3}"}
+      {/case}
+
+    {/exp:switchee}
+
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+  {embed="_aside/shopping"}
+{/exp:partials:set}
+
+{exp:partials:set name="footer_last"}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('a.pl_favorites_save').click (function() {
+      $('.pl_favorites_status').slideDown();
+      var link = $(this).attr('href');
+      $('.pl_favorites_status').load(link, function() {
+        setTimeout(function () {
+          $('.pl_favorites_status').slideUp(function(){
+            $('.pl_favorites_delete').fadeIn('fast');
+          });
+        }, 1000);
+      });
+      $(this).hide();
+      return false;
+    });
+
+    $('a.pl_favorites_delete').click (function() {
+      $('.pl_favorites_status').slideDown();
+      var link = $(this).attr('href');
+      $('.pl_favorites_status').load(link, function() {
+        setTimeout(function () {
+          $('.pl_favorites_status').slideUp(function(){
+            $('.pl_favorites_save').fadeIn('fast');
+          });
+        }, 1000);
+      });
+      $(this).hide();
+      return false;
+    });
+  });
+</script>
+{/exp:partials:set}

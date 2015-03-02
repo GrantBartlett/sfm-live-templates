@@ -1,0 +1,154 @@
+{embed="__includes/wrapper" body_class="sfmplus sub home"}
+
+{exp:channel:entries channel="offers" entry_id="{embed:entry_id}" show_future_entries="yes" show_expired="yes"}
+    {exp:partials:set name="meta_og"}
+        <meta property="og:title" content="{offer_name_{language_code}}"/>
+        <meta property="og:description" content="{offer_excerpt_{language_code}}"/>
+    {/exp:partials:set}
+    {exp:partials:set name='meta_image'}
+        <meta property="og:image" content="{offer_image}">
+    {/exp:partials:set}
+{/exp:channel:entries}
+
+{exp:partials:set name="sections"}
+
+<section id="shared_successfully" class="competition notice featured g-all-c" style="display: none;">
+    <div class="mt-20">
+        <div class="row">
+            <div class="col-xs-12" {dir_lang}>
+            <header class="entry-header">
+                <h1 class="section-header clearfix">
+                    <div class="sign hidden-xs">
+                        <i class="fa fa-smile-o fa-lg"></i>
+                    </div>
+                    {sharetowin_CongratulationsEntered_{language_code}}
+                </h1>
+                <div class="entry-description text-center">
+                    {if "{segment_1}" == "big3"}
+                        <p class="lead">{sharetowin_big3Entered_{language_code}} <a href="{base}share">{enter_now_{language_code}}</a></p>
+                    {if:elseif "{segment_1}" == "share"}
+                        <p class="lead">{sharetowin_shareEntered_{language_code}} </p>
+                    {/if}
+                </div>
+            </header>
+        </div>
+    </div>
+</section>
+
+{embed="sfm-plus/_sharestats"}
+
+<div class="mt-20 mb-20 clearfix">
+    {exp:channel:entries channel="offers" show_future_entries="yes" show_expired="yes" dynamic="no" entry_id="{embed:entry_id}"}
+        {if current_time > expiration_date}
+        <section class="competition notice featured g-all-c">
+            <div class="mt-20">
+                <div class="row">
+                    <div class="col-xs-12" {dir_lang}>
+                    <header class="entry-header">
+                        <h1 class="section-header clearfix">
+                            <div class="sign hidden-xs">
+                                <i class="fa fa-star"></i>
+                            </div>
+                            {comp_detail_ended_{language_code}}
+                        </h1>
+                        <div class="entry-description text-center">
+                            <p class="lead">{comp_detail_endeddesc_{language_code}} {if language_code == 'en'}
+                                <a href="/sfm-plus/">Take a look...</a>{/if}</p>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </section>
+        {/if}
+
+        <section class="g-all-c" {dir_lang}>
+            <div class="row clearfix">
+                <div class="col-xs-12">
+                    <header class="entry-header">
+                        <h1 class="section-header {if '{language_code}' == 'en'}text-left {if:else}text-right{/if} mb-0 pb-10">
+                            <span class="sign hidden-xs">
+                                {if current_time > expiration_date}{comp_expired_{language_code}}{if:else}{comp_exclusive_{language_code}}{/if}
+                            </span> {offer_name_{language_code}}
+                        </h1>
+                    </header>
+                </div>
+            </div>
+        </section>
+
+        <section class="g-all-c" {dir_lang}>
+            <div class="row clearfix">
+                <div class="col-md-7 {if '{language_code}' == 'en'}text-left {if:else} text-right{/if} detail clearfix">
+                    <div class="mb-20">
+                        {offer_image:650x350 wrap="image"}
+                    </div>
+                    {if logged_out}
+                        {offer_body_{language_code}}
+                    {/if}
+                </div>
+
+                <div class="col-md-5 {if '{language_code}' == 'en'}text-left {if:else} text-right{/if} detail clearfix">
+                    {exp:stash:set name="freeform_id"}{offer_form_id}{/exp:stash:set}
+                    {exp:stash:set name="winners"}{prize_winners_{language_code}}{/exp:stash:set}
+
+                    {if current_time > expiration_date}
+                        {embed="/sfm-plus/_ended" entry_id="{entry_id}"}
+                    {if:else}
+                        {if logged_in}
+                            {if offer_compshare == 'yes'}
+                                <div id="teaser-instructions" class="teaser text-center">
+                                    <h3 class="mt-20 text-center">{sharetowin_nearlyThere_{language_code}}</h3>
+                                    <p class="mt-30 mb-30 text-center">{sharetowin_nearlyThereDesc_{language_code}}</p>
+                                </div>
+                            {/if}
+                            {embed="/sfm-plus/_form"
+                                title="{title}"
+                                title_ar="{offer_name_ar}"
+                                title_en="{offer_name_en}"
+                                tweet_hashtag="{if offer_hashtag}{offer_hashtag}{if:else}#shareToWin{/if}"
+                                tweet_bitly_ar="{if bitly_link_ar}{bitly_link_ar}{if:else}{current_url}{/if}"
+                                tweet_bitly_en="{if bitly_link_en}{bitly_link_en}{if:else}{current_url}{/if}"
+                                tweet_ar="{if offer_social_post_ar}{offer_social_post_ar}{if:else}{offer_name_ar}{/if}"
+                                tweet_en="{if offer_social_post_en}{offer_social_post_en}{if:else}{offer_name_en}{/if}"
+                                facebook_image="{offer_facebook_image}" image="{offer_image:650x350}"
+                                form_id="{offer_form_id}"
+                                entry_id="{entry_id}"
+                                urltitle="{url_title}"
+                                canShare="{offer_compshare}"
+                                customQuestion="{offer_custom_question}"
+                              "}
+
+                        {if:else}
+                            {embed="/sfm-plus/_join"}
+                        {/if}
+                    {/if}
+
+                    {if logged_in && current_time < expiration_date}
+                        {offer_body_{language_code}}
+                        <small style="font-size: 10px;">{comp_prizeterms_{language_code}}</small>
+                        <small style="font-size: 10px;">
+                            - <a href="{base}terms/competition-terms-and-conditions">{sharetowin_TermsConditions_{language_code}}</a> {sharetowin_apply_{language_code}}.
+                        </small>
+                    {/if}
+                </div>
+            </div>
+        </section>
+    {/exp:channel:entries}
+</div>
+
+{embed="sfm-plus/_winners"}
+{embed="sfm-plus/_competitionsViewMore"}
+
+{exp:channel:entries channel="offers" url_title="{last_segment}" show_future_entries="yes" show_expired="yes" search:offer_comphide="no" dynamic="no"}
+    {!-- entry_id to prevent it from displaying current competition again --}
+    {embed="sfm-plus/_competitions" detail_entry_id="{entry_id}"}
+{/exp:channel:entries}
+
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+    <script src="/assets/js/jquery.validate.min.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="js_pageload"}
+    $("#register_comp").validate();
+{/exp:partials:set}

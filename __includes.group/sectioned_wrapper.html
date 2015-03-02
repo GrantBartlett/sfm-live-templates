@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>
+<html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>
+<html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>
+<html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <title>{exp:partials:get name="page_title"} | {site_name}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+  {exp:seo_lite use_last_segment="yes"}
+  <meta name="author" content="SMSW Media">
+  {exp:mobile_detect:screen_detect}
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <link href="/assets/stylesheets/grid/output.css" rel="stylesheet" type="text/css"/>
+  <link href="/assets/stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+  <script src="/assets/js/vendor/custom.modernizr.js"></script>
+  {exp:partials:get name="last_head"}
+</head>
+<body class="{embed:body_class}">
+  <div id="mueller-indicators">
+    <p class="hr-show">Hires</p>
+    <p class="l-show">Large</p>
+    <p class="d-show">Default</p>
+    <p class="tp-show">Tablet Portait</p>
+    <p class="hl-show">Handheld Landscape</p>
+    <p class="h-show">Handheld Portait</p>
+  </div>
+
+  {exp:partials:get name="opening_body"}
+
+  <section class="info">
+    <div id="top" class="g-all-c">
+      <ul class="right">
+        {if logged_in}
+        <li>WELCOME {screen_name} <a href="/members-area/profile/{member_id}/">EDIT YOUR PROFILE</a></li>
+        {/if}
+        <li><a href="/newsletter/">NEWSLETTER</a></li>
+        {if logged_out}
+        <li><a href="/members-area/sign-in/">SIGN IN</a></li>
+        <li><a href="/members-area/join/">JOIN</a></li>
+        {/if}
+        <li><a href="/search/">SEARCH</a></li>
+        {if logged_in}
+        <li><a href="/?ACT=23">LOGOUT</a></li>
+        {/if}
+      </ul>
+    </div>
+  </section>
+
+  <section class="top">
+    <header id="main-header" class="g-all-c">
+      <nav>
+        <h1 class="brand"><a href="{site_url}"><img src="{theme_folder_url}site_themes/saudifashion/branding.png"></a></h1>
+        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar collapsed">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        {exp:navee:nav nav_title="main_navigation_2" last_class="last" list_type="ol"}
+      </nav>
+    </header>
+  </section>
+
+  <section class="main">
+    <div id="wrapper">
+      <div id="content-container">
+        {exp:partials:get name="aside-left"}
+        {exp:partials:get name="content"}
+        {exp:partials:get name="aside-right"}
+      </div>
+      <div id="root_footer"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="g-all-c">
+      {exp:navee:nav nav_title="footer-navigation-primary" class="primary" last_class="last" list_type="ul"}
+      {exp:navee:nav nav_title="footer-navigation-secondary" class="secondary" last_class="last" list_type="ul"}
+      {exp:navee:nav nav_title="footer-navigation-tertiary" class="tertiary" last_class="last" list_type="ul"}
+    </div>
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  {exp:likee:js skip_jquery="true"}
+  <script src="/assets/js/responsive.navigation.js"></script>
+  <script src="/assets/js/vendor/jquery.cycle.all.js"></script>
+  <script src="/assets/js/foundation/foundation.js"></script>
+  <script src="/assets/js/foundation/foundation.section.js"></script>
+  <script src="/assets/js/foundation/foundation.reveal.js"></script>
+  <script src="/assets/js/foundation/foundation.forms.js"></script>
+  <script src="/assets/js/vendor/jquery.masonry.min.js"></script>
+  <script src="/assets/js/vendor/mustache.js"></script>
+  <script src="/assets/js/pinterest-data.js"></script>
+  <script src="/assets/js/deal_wall.js"></script>
+  {exp:partials:get name="footer_script_includes"}
+  <script>
+    $(function () {
+      // Required globally
+      $(document).foundation();
+      ResponsiveNav.init();
+      DealWall.init();
+      {exp:partials:get name="js_pageload"}
+    });
+  </script>
+  {exp:partials:get name="footer_last"}
+</body>
+</html>

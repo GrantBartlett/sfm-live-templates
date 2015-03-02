@@ -1,0 +1,32 @@
+{
+    "mall": [
+        {exp:channel:entries channel="mall" orderby="title" sort="asc" backspace="1" limit="{segment_4}"}{
+            "id": "{entry_id}",
+            "area": "{categories}{category_name}{/categories}",
+            "city": "{city}",
+            "name": "{title}",
+            "description": "{exp:add_slashes}{exp:strip_line_breaks}{exp:remove_html}{mall_excerpt}{/exp:remove_html}{/exp:strip_line_breaks}{/exp:add_slashes}",
+            "image": "{mall_image}",
+            "geo_lat": "{geo_lat}",
+            "geo_lng": "{geo_lng}",
+            "geo_zoom": "{geo_zoom}",
+            "telephone": "{mall_telephone}",
+            "email": "{mall_email}",
+            "open": [
+              {mall_open_times backspace="1"}{
+                "day": "{day}",
+                "from_am": "{if from_am}{from_am}{if:else}-{/if}",
+                "to_am": "{if to_am}{to_am}{if:else}-{/if}",
+                "from_pm": "{if from_pm}{from_pm}{if:else}-{/if}",
+                "to_pm": "{if to_pm}{to_pm}{if:else}-{/if}"
+              },{/mall_open_times}
+            ],
+            "brands": [
+              {brands backspace="1"}{
+                    "id": "{brands:entry_id}",
+                    "name": "{brands:title}"
+                },{/brands}
+            ]
+        },{/exp:channel:entries}
+    ]
+}

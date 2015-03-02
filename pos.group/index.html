@@ -1,0 +1,159 @@
+{embed="__includes/basic_wrapper" body_class="pos sfmplus sub home"}
+
+{exp:partials:set name="page_title"}POS Members{/exp:partials:set}
+
+{!--
+
+@todo
+    - need translation to "Hi {screen_name}, welcome to Saudi Fashion Magazine"
+    - need translation for {sfm_reset_password_para} and {sfm_reset_password_title} at the moment they are arabic for forgotten password
+--}
+
+{exp:partials:set name="sections"}
+<style>
+    .sfmplus .content {
+        background: transparent;
+    }
+    #top .brand {
+        z-index: 999;
+    }
+    .first-section {
+        position: relative;
+        padding: 3em 0;
+    }
+    .last-section {
+        padding: 2em 0 7em;
+    }
+    .big-heart {
+        font-size: 5em;
+        color: #f45147;
+    }
+    .sign {
+        background: #f45147;
+        display: inline-block;
+        color: white;
+        padding: 12px 9px 10px 20px;
+        font-size: 0.6em;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 6px;
+        position: relative;
+        top: -3px;
+    }
+    .arrow {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        background: #f45147;
+        line-height: 50px;
+        color: white;
+        border-radius: 50px;
+        position: absolute;
+        left: 50%;
+        bottom: -50px;
+    }
+    .pos-feature {
+        background: #FFF !important;
+        color: #333;
+        padding-top: 4px;
+        padding-bottom: 25px;
+        margin-top: 25px;
+        border: none;
+    }
+    .sidebar section.intro {
+        background: transparent;
+        padding: 0;
+        padding-left: 15px;
+        border: none;
+        color: #333;
+    }
+    .sidebar section.intro h1 {
+        color: #000;
+    }
+    .sidebar section.intro p {
+        color: #333;
+    }
+</style>
+<section class="content text-center mb-30 mt-30 first-section">
+    <div class="wrapper">
+        <div class="ly_content-container">
+            <header class="entry-header">
+                <h1 class="section-header">Welcome to Saudi Fashion Magazine</h1>
+                <div class="entry-description">
+                    <p>Sit back and enjoy a seriously stylish selection of news, advice and exclusive competitions!</p>
+                </div>
+            </header>
+            <article class="entry-content mt-30">
+                <p class="mt-0">
+                    We recommend that you <a href="{base}members-area/reset-password/?user={username}" class="button tiny radius" style="color:#fff!important;">RESET YOUR PASSWORD</a>
+                    Your username is <strong>{username}</strong>.
+                </p>
+            </article>
+            <article class="entry-content mt-30">
+                <p class="arrow"><i class="icon-chevron-down"></i></p>
+            </article>
+        </div>
+    </div>
+</section>
+
+{embed="sfm-plus/_featured"}
+{/exp:partials:set}
+
+
+{exp:partials:set name="content"}
+<section class="l-full-4c featured-video">
+    <header class="entry-header">
+        <h1 class="section-header {if language_code == "en"}text-left{if:else}text-right{/if} mb-0 pb-5">
+        {exp:channel:categories category_group="6" show="31"
+        style="linear"}<span class="sign">Exclusive</span> {category_name_{language_code}}{/exp:channel:categories}
+        </h1>
+        <div class="entry-description">
+            <p>
+                {exp:channel:categories category_group="6" show="31" style="linear"}
+                {category_description_{language_code}}
+                {/exp:channel:categories}
+            </p>
+        </div>
+    </header>
+    {embed="articles/4col-featured" category="31" status="{entry_status_lng}"}
+</section>
+
+<section class="l-full-4c featured-video">
+    <header class="entry-header">
+        <h1 class="section-header {if language_code == "en"}text-left{if:else}text-right{/if} mb-0 pb-5">
+        {exp:channel:categories category_group="6" show="34"
+        style="linear"}<span class="sign">Exclusive</span> {category_name_{language_code}}{/exp:channel:categories}
+        </h1>
+        <div class="entry-description">
+            <p>
+                {exp:channel:categories category_group="6" show="34" style="linear"}
+                {category_description_{language_code}}
+                {/exp:channel:categories}
+            </p>
+        </div>
+    </header>
+    {embed="articles/4col-featured" category="34" status="{entry_status_lng}"}
+</section>
+
+<section class="l-full-4c featured-video">
+    <header class="entry-header">
+        <h1 class="section-header text-left mb-0 pb-10"><span class="sign">Exclusive</span> {featured_fashion_fixes_{language_code}}</h1>
+        <div class="entry-description">
+            <p class="">{fashion_fix_para_{language_code}}</p>
+        </div>
+    </header>
+    {embed="fashion-fix/featured" status="{entry_status_lng}"}
+</section>
+
+<section class="last-section">
+    <header class="entry-header">
+        <h1 class="section-header text-center mb-0 pb-10 big-heart"><i class="icon-heart"></i></h1>
+    </header>
+    <article class="entry-content mt-30 text-center">
+        <p class="mt-0">
+            <strong>DONT FORGET...</strong><br>
+            <a href="{base}members-area/reset-password/?user={username}" class="button tiny radius" style="color:#fff!important;">RESET YOUR PASSWORD</a>
+        </p>
+    </article>
+</section>
+{/exp:partials:set}

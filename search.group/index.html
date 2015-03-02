@@ -1,0 +1,220 @@
+{!--
+/**
+BUGS:
+* Can Top Searches contain swear words??
+**/
+
+/**
+TODOS:
+* Check whether swear words are filtered
+**/
+--}
+
+{embed="__includes/wrapper" body_class="content search"}
+
+{exp:partials:set name="page_title"}Search{/exp:partials:set}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+  <section class="content-section">
+
+    <header class="entry-header">
+      <h3 class="category">Search {if segment_2 != ""}results for...{/if}</h3>
+      {if segment_2 != ""}<h1 class="entry-title" style="text-transform: capitalize">{exp:low_search:keywords query="{segment_2}"}</h1>{/if}
+    </header>
+
+  </section>
+
+  <hr>
+
+  <section class="content-section">
+
+    <article class="l-70-30c">
+      <div class="c-1">
+        <p>Search for articles, videos, lookbooks, vouchers and competitions on {site_name}. Enter your keyword and click search.</p>
+      </div>
+      <div class="c-2 search-form mt-30">
+        {exp:low_search:form collection="entry|sfm-plus" search_mode="all" result_page="search/index" form_class="custom mb-0"}
+        <input type="text" placeholder="Search..." name="keywords" id="keywords" value="">
+        <button type="submit" class="button small radius mb-0 float-right">Search</button>
+        {/exp:low_search:form}
+      </div>
+    </article>
+
+  </section>
+
+  <hr>
+
+  <section class="content-section">
+
+    {exp:low_search:results collection="entry|sfm-plus" query="{segment_2}" limit="10" status="open|english only|arabic only" category="10|29|9|28|8|5|11"}
+
+      {if low_search_collection_name == 'entry'}
+      <article class="l-70-30cr post content-section">
+        {if '{categories limit="1" parent_only="yes"}{category_name}{/categories}' == 'article'}
+          <a href="{base}articles/reading/{url_title}/" class="c-1"><img src="{entry_image:3_col_large}" style="width: 100%"></a>
+          <div class="c-2">
+            <span class="category">{categories limit="1" show_group="6"}{category_name_{language_code}}{/categories}</span>
+            <h1><a href="{base}articles/reading/{url_title}/">{entry_name_{language_code}}</a></h1>
+            <p>{entry_excerpt_{language_code}}</p>
+          </div>
+        {/if}
+
+        {if '{categories limit="1" parent_only="yes"}{category_name}{/categories}' == 'video'}
+          <a href="{base}videos/watching/{url_title}/" class="c-1 img-icon">
+            <img src="{entry_image:3_col_large}" style="width: 100%" class="image">
+            <img src="/themes/site_themes/saudifashion/video-icon.png" width="140" height="84" alt="" class="mask">
+          </a>
+          <div class="c-2">
+            <span class="category">Video</span>
+            <h1><a href="{base}videos/watching/{url_title}/">{entry_name_{language_code}}</a></h1>
+            <p>{entry_excerpt_{language_code}}</p>
+          </div>
+        {/if}
+
+        {if '{categories limit="1" parent_only="yes"}{category_name}{/categories}' == 'lookbook'}
+          <a href="{base}lookbooks/viewing/{url_title}/" class="c-1 img-icon">
+            <img src="{entry_image:3_col_large}" style="width: 100%" class="image">
+            <img src="/themes/site_themes/saudifashion/gallery-icon.png" width="140" height="84" alt="" class="mask">
+          </a>
+          <div class="c-2">
+            <span class="category">Pictures</span>
+            <h1><a href="{base}lookbooks/viewing/{url_title}/">{entry_name_{language_code}}</a></h1>
+            <p>{entry_excerpt_{language_code}}</p>
+          </div>
+        {/if}
+
+      </article>
+      {/if}
+
+      {if low_search_collection_name == 'sfm-plus'}
+      <article class="l-70-30cr post content-section">
+        <a href="{base}sfm-plus/r/{url_title}/" class="c-1"><img src="{entry_image:3_col_large}" style="width: 100%"></a>
+        <div class="c-2">
+          <span class="category">SFM PLUS: {categories limit="1" show_group="2"}{category_name_{language_code}}{/categories}</span>
+          <h1><a href="{base}sfm-plus/r/{url_title}/">{entry_name_{language_code}}</a></h1>
+          <p>{entry_excerpt_{language_code}}</p>
+          <small>Filed under <a href="{base}sfm-plus/">{sfm_plus_{language_code}}</a></small>
+        </div>
+      </article>
+      {/if}
+
+      {paginate}
+        {pagination_links}
+    <div class="pagination-centered">
+        <ul class="pagination">
+          {first_page}
+          <li><a href="{pagination_url}" class="page-first">First Page</a></li>
+          {/first_page}
+
+          {previous_page}
+          <li><a href="{pagination_url}" class="page-previous">Previous Page</a></li>
+          {/previous_page}
+
+          {page}
+          <li class="{if current_page}current{/if}"><a href="{pagination_url}" class="page-{pagination_page_number}">{pagination_page_number}</a></li>
+          {/page}
+
+          {next_page}
+          <li><a href="{pagination_url}" class="page-next">Next Page</a></li>
+          {/next_page}
+
+          {last_page}
+          <li><a href="{pagination_url}" class="page-last">Last Page</a></li>
+          {/last_page}
+        </ul>
+    </div>
+        {/pagination_links}
+      {/paginate}
+
+      {if segment_2 != ""}
+        {if no_results}<h1>There are no results to display</h1>{/if}
+      {/if}
+
+    {/exp:low_search:results}
+
+    {if segment_2 == ""}
+    <section class="content-section featured-articles">
+      <div class="l-1c">
+        <h1 class="section-header">Articles on {site_name}</h1>
+        <div class="c-1">
+          {exp:channel:entries channel="entry" category_group="6" cache="yes" refresh="10" limit="3" sticky="yes" dynamic="no" status="open|english only|arabic only"}
+          <article class="g-all-thirds {switch='||g-all-l'}">
+            <a href="{base}articles/reading/{url_title}/"><img src="{entry_image:3_col_large}" style="width: 100%"></a>
+            {categories limit="1" show_group="6"}<a href="{base}articles/category/{category_url_title}/" class="category">{category_name_{language_code}}</a>{/categories}
+            <h1 {entry_dir_lng}><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+            <p {entry_dir_lng}>{entry_excerpt_lng}</p>
+          </article>
+          {/exp:channel:entries}
+        </div>
+      </div>
+    </section>
+
+    {embed="articles/list-of-threes" status="{entry_status_lng}"}
+
+    {/if}
+
+  </section>
+
+</div>
+{/exp:partials:set}
+
+
+{exp:partials:set name="aside-right"}
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+  {!--
+  {exp:low_search:filters query="{segment_2}"}
+  <section>
+    <header>
+      <h1>Filter Content</h1>
+    </header>
+    <article>
+      {exp:channel:categories channel="entry" category_group="2" style="linear"}
+        {if count ==  1}<ul>{/if}
+        <li>
+          <a href="{low_search:url toggle:category="{category_id}"}" style="text-transform: capitalize">{category_name}</a>
+          {if category_id IN ({low_search_category})}&check;{/if}
+        </li>
+        {if count == total_results}</ul>{/if}
+      {/exp:channel:categories}
+    </article>
+  </section>
+
+  <section>
+    <header>
+      <h1>Filter Categories</h1>
+    </header>
+    <article>
+      {exp:channel:categories channel="entry" category_group="6" style="linear"}
+        {if count ==  1}<ul>{/if}
+        <li>
+          <a href="{low_search:url toggle:category="{category_id}"}">{category_name}</a>
+          {if category_id IN ({low_search_category})}&check;{/if}
+        </li>
+        {if count == total_results}</ul>{/if}
+      {/exp:channel:categories}
+    </article>
+  </section>
+  {/exp:low_search:filters}
+  --}
+
+  {embed="_aside/articles" article-list-limit="12" status="{entry_status_lng}"}
+
+  {!-- removed as can contain swear words
+  <section>
+    <header>
+      <h1>Top Searches</h1>
+    </header>
+    <article>
+      {exp:low_search:popular limit="10"}
+      {if count == 1}<ul>{/if}
+        <li><a href="{exp:low_search:url keywords="{keywords}"}">{keywords}</a> <span class="search_count">{search_count}</span></li>
+        {if count == total_results}</ul>{/if}
+      {/exp:low_search:popular}
+    </article>
+  </section>
+  --}
+</aside>
+{/exp:partials:set}

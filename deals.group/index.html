@@ -1,0 +1,25 @@
+{embed="__includes/wrapper" body_class="deals" nav_active=""}
+
+{exp:partials:set name="page_title"}Deals{/exp:partials:set}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+  {!-- catch shopping uri without further segments --}
+  {if segment_2 == ''}
+  <section id="deals" class="pl_masonry_wall">
+    <h1 class="section-header">Deals</h1>
+    {embed="deals/masonry-wall"}
+  </section>
+  {/if}
+
+  <section class="content-section">
+    Deal detail here
+  </section>
+
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+{embed="_aside/deals"}
+{/exp:partials:set}

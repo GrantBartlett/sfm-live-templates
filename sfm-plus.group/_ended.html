@@ -1,0 +1,40 @@
+<section class="winner">
+    {if logged_out}
+    <header class="entry-header">
+        <h1 class="section-header clearfix">
+            <div class="sign">
+                {comp_winner_{language_code}}
+            </div>
+        </h1>
+        <div class="entry-description text-center">
+            <p class="lead"><a href="{base}members-area/" data-reveal-id="signin_modal">{sign_in_{language_code}}</a> {comp_winnerdesc_{language_code}}</p>
+        </div>
+    </header>
+    {if:else}
+    <header class="entry-header">
+        <h1 class="section-header clearfix">
+            <div class="sign">
+                <i class="fa fa-star"></i>
+            </div>
+        </h1>
+        <div class="entry-description text-center">
+            {exp:channel:entries channel="offers" show_future_entries="yes" show_expired="yes" orderby="expiration_date" sort="desc" dynamic="no" entry_id="{embed:entry_id}""}
+                {if offer_winner_names:total_rows}
+
+                    {sfm_congratulations_to_{language_code}}
+                    {offer_winner_names}
+                           <a href="{offer_winner_names:social_url}" target="_blank">{offer_winner_names:title}, </a>
+                    {/offer_winner_names}
+
+                    {if language_code == 'en'}
+                        <p>Miss out this time? Don’t worry! Enter some of our other amazing competitions now for a chance to win…</p>
+                    {/if}
+
+                {if:else}
+                    {comp_winnersanounncedsoon_{language_code}}
+                {/if}
+            {/exp:channel:entries}
+        </div>
+    </header>
+    {/if}
+</section>

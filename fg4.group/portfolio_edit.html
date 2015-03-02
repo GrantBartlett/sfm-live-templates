@@ -1,0 +1,103 @@
+{!-- PARSE IS HELL --}
+{exp:member:custom_profile_data}
+    {exp:freeform:entries form_name="fg4" author_id="{logged_in_member_id}" parse="inward"}
+        {if freeform:no_results}
+            {redirect="/fg4/step_1"}
+        {/if}
+    {/exp:freeform:entries}
+{/exp:member:custom_profile_data}
+
+{if logged_out}
+    {redirect="/fg4/"}
+{/if}
+
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+
+{exp:partials:set name="content"}
+{!-- BEGIN --}
+    {exp:channel:entries channel="fg4" entry_id="924" dynamic="no"}
+        {if logged_in}
+
+            <header class="entry-header">
+                <section class="clearfix">
+                    <div class="{if language_code == 'en'}left{if:else}right{/if}" style="width:80%">
+                        <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">
+                            {fg4_entry_name_{language_code}}
+                            {exp:member:custom_profile_data}
+                                {if logged_in_member_id == segment_3}
+                                    {exp:freeform:entries form_name="fg4" author_id="{logged_in_member_id}"} 
+                                    <br>
+                                    <small>{fg4_s_entry_name_{language_code}} {freeform:field:first_name} {freeform:field:last_name} ({logged_in_screen_name})</small>
+                                    {/exp:freeform:entries}
+                                {/if}
+                            {/exp:member:custom_profile_data}
+                        </h1>
+                    </div>
+                    <div class="{if language_code == 'en'}right{if:else}left{/if} fg4logo">
+                        <img src="{fg4_logo}" alt="">
+                    </div>
+                </section>
+                <hr>
+            </header>
+
+            {if logged_in_member_id == segment_3}
+
+                {exp:freeform:edit form_name="fg4" entry_id="{segment_4}" return="fg4/complete" form:id="portfolio_edit" notify_on_edit="yes" user_notification_template="fg4_competition_updated_notification" user_email_field="hidden_email"}
+                <div class="row entry-content {if language_code == 'en'}right{if:else}left{/if} mb-30">
+                    <div class="col-md-5">
+                        {fg4_entry_content_{language_code}}
+                        <p>
+                            <label>{fg4_first_name_{language_code}}
+                                <span class="required">*</span>
+                            </label>
+                            {freeform:field:first_name attr:required="required"}
+                        </p>
+
+                        <p>
+                            <label>{fg4_last_name_{language_code}}
+                                <span class="required">*</span>
+                            </label>
+                            {freeform:field:last_name attr:required="required"}
+                        </p>
+
+                        <p>
+                            <label>{sfm_telephone_{language_code}}
+                                <span class="required">*</span>
+                            </label>
+                            {freeform:field:mobile_number attr:required="required"}
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 col-md-push-1">
+                        {fg4_entry_content_extra_{language_code}}
+                        <p>
+                            <label>{fg4_upload_{language_code}}</label>
+                            {freeform:field:upload}
+							<p>Max upload: 20mb. Have a problem uploading? Send us an <a href="mailto:info@saudifashionmagazine.com?Subject=FG4 Problem">email</a> to info@saudifashionmagazine.com</p>
+                        </p>
+                        {freeform:field:hidden_email}{freeform:field:hidden_screenname}
+
+                         <p><input class="radius button medium mb-0" type="submit" name="submit" value="{sfm_submit_{language_code}}" required="required"></p>
+                    </div>
+                </div>
+                {/exp:freeform:edit}
+             
+
+            {if:else}
+                {redirect="/fg4/portfolio"}
+            {/if}
+
+        {/if}{!-- END Logged IN --}
+    {/exp:channel:entries}
+
+
+{!-- END --}
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+<script src="/assets/js/jquery.validate.min.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="js_pageload"}
+$("#portfolio_edit").validate();
+{/exp:partials:set}

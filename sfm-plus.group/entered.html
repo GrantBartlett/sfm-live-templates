@@ -1,0 +1,37 @@
+{embed="__includes/wrapper" body_class="sfmplus sub home"}
+
+{exp:partials:set name="sections"}
+
+<section class="competition notice featured g-all-c">
+    <div class="mt-20">
+        <div class="row">
+            <div class="col-xs-12" {dir_lang}>
+            <header class="entry-header">
+                <h1 class="section-header clearfix">
+                    <div class="sign">
+                        <i class="fa fa-smile-o fa-lg"></i>
+                    </div>
+                    You have entered this competition!
+                </h1>
+                <div class="entry-description text-center">
+                    <p class="lead">You can never have too many fabulous prizes! Enter in more below...
+                    </p>
+                </div>
+            </header>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            $(".notice").fadeOut(1500, function () {
+                $(this).css({"visibility": "hidden", display: 'block'}).slideUp();
+            });
+        }, 4500);
+    })
+</script>
+
+{embed="sfm-plus/_featured"}
+{embed="sfm-plus/_competitions"}
+{/exp:partials:set}

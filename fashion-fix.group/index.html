@@ -1,0 +1,38 @@
+{embed="__includes/wrapper" body_class="fashion-fix-list"}
+
+{exp:partials:set name="page_title"}Fashion Fix{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<section class="l-full-4c featured-video">
+    <header class="entry-header">
+        <h1 class="section-header text-left mb-0 pb-10">{featured_fashion_fixes_{language_code}}</h1>
+        <div class="entry-description">
+            <p class="">{fashion_fix_para_{language_code}}</p>
+        </div>
+    </header>
+    {embed="fashion-fix/featured" status="{entry_status_lng}"}
+</section>
+
+<div id="content">
+
+    <section class="content-section">
+
+        {embed="fashion-fix/list" status="{entry_status_lng}"}
+
+    </section>
+
+</div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+
+    {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="18"}
+
+    {embed="_entry/todays-videos" status="{entry_status_lng}" limit="4"}
+
+</aside>
+{/exp:partials:set}

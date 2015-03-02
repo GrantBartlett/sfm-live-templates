@@ -1,0 +1,19 @@
+<section class="l-4c video fashion-fix mb-20 ff-slider" style="position: relative">
+    <h1 class="cat section-header"><a href="{base}fashion-fix/">{this_weeks_fashion_fix_{language_code}}</a></h1>
+    {!--<p>Where to buy the latest outfits from top brands at a fraction of the price. <a href="{base}fashion-fix/">View all</a></p>
+    <div class="slide-navigation">
+        <a id="ff-prev" href="#" class="prev">Prev</a>
+        <a id="ff-next" href="#" class="next">Next</a>
+    </div>
+    --}
+    <div id="ff-slideshow2">
+        {exp:channel:entries channel="entry" category_group="2" category="38" cache="yes" refresh="10" limit="4" dynamic="no"}
+        <div class="ff-slides {switch='c-1|c-2|c-3|c-4'}">
+            <a href="{base}fashion-fix/viewing/{url_title}/" class="image drop-shadow">
+                <img src="{entry_image:3_col_large}" style="width: 100%">
+            </a>
+            <h2><a href="{base}fashion-fix/viewing/{url_title}/">{entry_name_{language_code}}</a></h2>
+        </div>
+        {/exp:channel:entries}
+    </div>
+</section>

@@ -1,0 +1,9 @@
+<div class="l-4nmc">
+    {exp:channel:entries channel="entry" category_group="6" limit="5" sticky="no" offset="1" status="{embed:status}"}
+    <article class="{switch='c-1|c-2|c-3|c-4|c-4 l-show hr-show'}" {entry_dir_lng}>
+        <a href="{base}articles/reading/{url_title}/"><img src="{entry_image:3_col_large}" style="width: 100%"></a>
+        <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+        <p>{entry_excerpt_lng}</p>
+    </article>
+    {/exp:channel:entries}
+</div>

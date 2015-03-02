@@ -1,0 +1,69 @@
+{exp:member:login_form
+    return="{current_url}"
+    form_id="js_signinform"
+    form_class="js_member_form"
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="text-center" style="font-size: 35px;color: #D1D1D1;padding: 15px;"><i class="fa fa-user fa-3x"></i></h1>
+
+        <h2 style="font-size: 22px;text-align: center;margin-bottom: 20px;color: #3F3F3F;">{membersarea_SignIn_{language_code}} </h2>
+
+        <div class="form-group">
+            <label class="hide_form_labels" for="username">{sfm_email_{language_code}}</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="{sharetowin_EmailPlaceHolder_{language_code}}" required>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="password">{sfm_password_{language_code}}</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="{membersarea_PasswordPlaceHolder_{language_code}}" required>
+        </div>
+    </div>
+    <div class="col-xs-12">
+
+        <div id="message_signin" class="clearfix mb-10 alert alert-warning" style="display: none;font-size:13px!important;"></div>
+
+        <div class="form-group">
+            <input class="btn btn-green btn-action" type="submit" name="submit" value="{sfm_signin_{language_code}}">
+        </div>
+
+        <div class="form-group text-center facebook-login mt-30">
+            {exp:fbc:login login_button_label="{membersarea_SignInUsingFacebook_{language_code}}" permissions="email|" return_on_failure="/members-area" button_size="large" } {if fbc_logged_out == "y"}{fbc_login_button}{/if} {if fbc_logged_in == "y"}{membersarea_LoggedInThroughFacebook_{language_code}} (<a href="{path='logout'}">{membersarea_LogOut_{language_code}}</a>){/if} {/exp:fbc:login}
+        </div>
+        <p class="text-center form-text">
+            {membersarea_JoinDesc_{language_code}} <a href="/members-area/" data-reveal-id="join_modal">{membersarea_RegisterNow_{language_code}}</a>
+            <br> {sfm_forgottenpassword_{language_code}} <a href="/members-area/forgot-password/">{membersarea_ClickToReset_{language_code}}</a>
+        </p>
+    </div>
+
+</div>
+{/exp:member:login_form}
+
+<script type="text/javascript">
+    // prepare the form when the DOM is ready
+    $(function () {
+        $('#js_signinform').parsley();
+
+        var options = {
+            target: '#message_signin',   // target element(s) to be updated with server response
+            success: showResponse  // post-submit callback
+        };
+
+        // bind to the form's submit event
+        $('#js_signinform').submit(function () {
+            // inside event callbacks 'this' is the DOM element so we first
+            // wrap it in a jQuery object and then invoke ajaxSubmit
+            $(this).ajaxSubmit(options);
+
+            // !!! Important !!!
+            // always return false to prevent standard browser submit and page navigation
+            return false;
+        });
+    });
+
+    function showResponse() {
+        $("#message_signin").fadeIn(800);
+    }
+</script>

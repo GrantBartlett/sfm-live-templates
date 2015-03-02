@@ -1,0 +1,91 @@
+{embed="__includes/wrapper" body_class="fashion-fix-list"}
+
+{exp:partials:set name="content"}
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<?php
+    $user_id = '406137702';
+    $access_token = '406137702.732fddc.de133e61313547c2b884ee4686b90bde';
+    // Output: https://api.instagram.com/v1/users/406137702/media/recent/?access_token=406137702.732fddc.de133e61313547c2b884ee4686b90bde
+
+    $url = "https://api.instagram.com/v1/users/$user_id/media/recent/?access_token=$access_token";
+    $json = file_get_contents($url);
+    $data = json_decode($json, TRUE);
+    $data = $data['data'];
+    $f_count = 1;
+?>
+
+<section class="l-full-4c featured-video mb-20">
+    <h1 class="section-header"><i class="fa fa-instagram"></i> Instagram</h1>
+
+    <?php foreach ($data as $k => $v) : ?>
+    <?php if($k <= '4') : ?>
+        <article class="c-<?= $f_count++; ?>">
+            <a href="<?= $v['link'] ?>" class="image" target="_blank">
+                <img src="<?= $v['images']['low_resolution']['url'] ?>">
+            </a>
+            <div class="insta-info ">
+                <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-heart"></i> <?= $v['likes']['count']; ?></a>
+            </div>
+            <div class="insta-info ">
+                <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-comments"></i> <?= $v['comments']['count']; ?></a>
+            </div>
+            <div class="insta-info ">
+                <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-calendar"></i> <?= date("d/m/Y", $v['caption']['created_time']); ?></a>
+            </div>
+        </article>
+        <?php if($f_count == '5')break; ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
+</section>
+
+{ad_sfm_plus_banner_white}
+
+<div id="content">
+    <section class="content-section">
+        <h1 class="section-header">{more_{language_code}}</h1>
+            <?php
+            foreach (array_chunk($data, 4, true) as $array)
+            {
+                $c = 1;
+                echo '<div class="three-clear l-4c">';
+                // key, and value to detect offset.
+                foreach($array as $k => $v)
+                {
+            ?>
+                    <?php if($k >= '4') : ?>
+                    <article class="tertiary c-<?= $c; ?> video">
+                        <a href="<?= $v['link'] ?>" class="image" target="_blank">
+                            <img src="<?= $v['images']['low_resolution']['url'] ?>">
+                        </a>
+                        <div class="insta-info small">
+                            <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-heart"></i> <?= $v['likes']['count']; ?></a>
+                        </div>
+                        <div class="insta-info small">
+                            <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-comments"></i> <?= $v['comments']['count']; ?></a>
+                        </div>
+                        <div class="insta-info small">
+                            <a href="<?= $v['link'] ?>" target="_blank"> <i class="fa fa-calendar"></i> <?= date("d/m/Y", $v['caption']['created_time']); ?></a>
+                        </div>
+                    </article>
+                    <?php endif; ?>
+            <?php
+                $c++;
+                }
+                echo '</div>';
+                }
+            ?>
+    </section>
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+    <section class="advert tp-hide roundicons_container">
+        {embed="_entry/follow"}
+    </section>
+
+    {embed="_entry/todays-pictures" status="{entry_status_lng}" limit="18"}
+    {embed="_entry/todays-videos" status="{entry_status_lng}" limit="4"}
+</aside>
+{/exp:partials:set}

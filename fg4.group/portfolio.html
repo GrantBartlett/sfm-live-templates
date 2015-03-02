@@ -1,0 +1,15 @@
+{!-- PARSE IS HELL --}
+{exp:member:custom_profile_data}
+    {exp:freeform:entries form_name="fg4" author_id="{logged_in_member_id}" parse="inward"}
+        {redirect="/fg4/portfolio_edit/{freeform:author_id}/{freeform:entry_id}"}
+        {freeform:author_id}
+        {freeform:entry_id}
+        {if freeform:no_results}
+            {redirect="/fg4/step_2"}
+        {/if}
+    {/exp:freeform:entries}
+{/exp:member:custom_profile_data}
+
+{if logged_out}
+    {redirect="/fg4/"}
+{/if}

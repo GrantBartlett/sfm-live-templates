@@ -1,0 +1,10 @@
+{if logged_in}
+    {redirect="/sfm-plus"}
+{/if}
+
+{embed="__includes/wrapper" body_class="sfmplus sub home"}
+
+{exp:partials:set name="sections"}
+    {embed="sfm-plus/_newmembers"}
+    {embed="sfm-plus/_featured"}
+{/exp:partials:set}

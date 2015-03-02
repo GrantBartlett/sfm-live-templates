@@ -1,0 +1,27 @@
+{embed="__includes/wrapper" body_class="content members-area"}
+
+{exp:partials:set name="page_title"}{heading}{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+    <section class="content-section">
+
+        {if language_code == "en"}
+            <h1 class="section-header text-left">Thank you</h1>
+            <div class="entry-content">
+                <p>You will receive an email from SFM confirming your entry <strong>(please remember to check your junk mail if you do not receive this email)</strong>.</p>
+            </div>
+        {if:else}
+            <h1 class="section-header text-right">شكراً لمشاركتك</h1>
+            <div class="entry-content">
+                <p>سوف تصلك رسالة على ايميلك لتأكيد مشاركتك (إذا لم تصلك الرسالة إبحث في فولد البريد الغير مرغوب فيه “junk-mail”)</p>
+            </div>
+        {/if}
+
+    </section>
+
+</div>
+
+{/exp:partials:set}

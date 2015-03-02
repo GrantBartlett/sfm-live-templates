@@ -1,0 +1,22 @@
+<article class="l-70-30c video fashion-fix mb-20 ff-slider" style="position: relative">
+    <div class="slide-navigation">
+        <a id="ff-prev" href="#" class="prev">Prev</a>
+        <a id="ff-next" href="#" class="next">Next</a>
+    </div>
+    <div id="ff-slideshow">
+    {exp:channel:entries channel="entry" category_group="2" category="38" cache="yes" refresh="10" limit="4" dynamic="no"}
+        <div class="ff-slides">
+            <div class="c-1">
+                <small class="cat"><a href="{base}fashion-fix/">{this_weeks_fashion_fix_{language_code}}</a></small>
+                <h1><a href="{base}fashion-fix/viewing/{url_title}/">{entry_name_{language_code}}</a></h1>
+                <p class="mt-10">{entry_excerpt_lng}</p>
+            </div>
+            <div class="c-2">
+                <a href="{base}fashion-fix/viewing/{url_title}/" class="image">
+                    <img src="{entry_image:3_col_large}" style="width: 100%">
+                </a>
+            </div>
+        </div>
+    {/exp:channel:entries}
+    </div>
+</article>

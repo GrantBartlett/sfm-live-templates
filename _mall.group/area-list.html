@@ -1,0 +1,10 @@
+<section class="mb-20">
+  <header>
+    <h1>What's in your area <small style="float: right;"> <a href="/shopping/malls/">View all</a></small></h1>
+  </header>
+  <ul>
+    {exp:query sql="SELECT COUNT(*) AS mall_count, field_id_21 AS city, entry_id FROM exp_channel_data WHERE channel_id=1 GROUP BY field_id_21 ORDER BY mall_count DESC"  cache="yes" refresh="10"}
+    <li>{if city}<a href="/shopping/malls/in/{exp:urlify}{city}{/exp:urlify}/">{/if}{if city}{city}{if:else}Unspecified city{/if}{if city}</a>{/if} <span class="mall-count">({mall_count} mall{if mall_count > 1}s{/if})</span></li>
+    {/exp:query}
+  </ul>
+</section>

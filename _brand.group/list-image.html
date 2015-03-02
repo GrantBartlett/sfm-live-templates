@@ -1,0 +1,9 @@
+{exp:channel:entries channel="brand" limit="{embed:limit}" orderby="{embed:orderby}" sort="{embed:sort}" category="{last_segment_category_id}"}
+  {exp:gwcode_alternate count="{embed:count}" alternate="{embed:alternate}"}
+  <article class="{embed:class} {alternate_value}" data-category="{categories}{category_name}{/categories}">
+    <a href="{embed:link}" class="image" title="{embed:link_title}">
+      <img src="{embed:img_url}" alt="{embed:link_title}">
+    </a>
+  </article>
+  {/exp:gwcode_alternate}
+{/exp:channel:entries}

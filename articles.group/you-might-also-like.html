@@ -1,0 +1,23 @@
+<section class="content-section featured-articles box-general">
+
+    <h1 class="section-header">{you_might_also_like_{language_code}}</h1>
+
+    <div class="row">
+        {exp:channel:entries channel="entry" category_group="6" category="{embed:category}" cache="yes" refresh="10" limit="3" dynamic="no" url_title="not {last_segment}" status="{embed:status}"}
+        <article class="col-xs-12 col-sm-4">
+            <a href="{base}articles/reading/{url_title}/">
+                <img src="{entry_image:3_col_large}" style="width: 100%">
+            </a>
+
+            {categories limit="1" show_group="6"}
+                <a href="{base}articles/category/{category_url_title}/" class="category"> {category_name_{language_code}} </a>
+            {/categories}
+            <h1 {entry_dir_lng}>
+                <a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a>
+            </h1>
+            <p {entry_dir_lng}>{entry_excerpt_lng}</p>
+        </article>
+        {/exp:channel:entries}
+    </div>
+
+</section>

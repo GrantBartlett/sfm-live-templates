@@ -1,0 +1,51 @@
+{!-- PARSE IS HELL --}
+{exp:member:custom_profile_data}
+    {exp:freeform:entries
+        form_name="fg4"
+        author_id="{logged_in_member_id}"
+    }
+    {if freeform:no_results}
+        {redirect="/fg4/step_2"}
+    {/if}
+    {/exp:freeform:entries}
+{/exp:member:custom_profile_data}
+
+{if logged_out}
+    {redirect="/fg4/step_1"}
+{/if}
+
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+
+{exp:partials:set name="content"}
+    {!-- BEGIN --}
+
+        {exp:channel:entries channel="fg4" limit="1" entry_id="929" dynamic="no"}
+        <header class="entry-header">
+            <section class="clearfix">
+                <div class="{if language_code == 'en'}left{if:else}right{/if}">
+                    <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+                    <div class="entry-description">
+                        <p>{fg4_s_entry_name_{language_code}}</p>
+                    </div>
+                </div>
+                <div class="right fg4logo">
+                    <img src="{fg4_logo}">
+                </div>
+            </section>
+            <hr>
+        </header>
+
+        <div class="halves {if language_code == 'en'}left{if:else}right{/if} mb-10 entry-content">
+            {fg4_entry_content_{language_code}}
+        </div>
+
+        <div class="halves {if language_code == 'en'}right{if:else}left{/if} mb-10 entry-content">
+            {fg4_entry_content_extra_{language_code}}
+            <p class="mb-20 mt-20">
+                <a href="{base}fg4/portfolio/{logged_in_member_id}" class="btn btn-green"><i class="icon-pencil"></i> {upload_edit_portfolio_{language_code}}</a>
+            </p>
+        </div>
+        {/exp:channel:entries}
+
+    {!-- END --}
+{/exp:partials:set}

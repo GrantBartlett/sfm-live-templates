@@ -1,0 +1,80 @@
+{if logged_in}
+    {redirect="/fg4/step_2"}
+{/if}
+
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+
+{exp:partials:set name="last_head"}
+<link rel="stylesheet" href="http://h5bp.github.io/Effeckt.css/assets/css/effeckt.css">
+{/exp:partials:set}
+
+{exp:partials:set name="content"}
+    {!-- BEGIN --}
+
+        {exp:channel:entries channel="fg4" entry_id="927" dynamic="no"}
+        <header class="entry-header">
+            <section class="clearfix">
+                <div class="{if language_code == 'en'}left{if:else}right{/if}" style="width:80%">
+                    <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+                    <h2 class="entry-title">{fg4_s_entry_name_{language_code}}</h2>
+                </div>
+                <div class="{if language_code == 'en'}right{if:else}left{/if} fg4logo">
+                    <img src="{fg4_logo}">
+                </div>
+            </section>
+            <hr>
+        </header>
+
+        {embed="fg4/_feature"}
+
+        <div class="halves {if language_code == 'en'}right{if:else}left{/if} mb-30 entry-content">
+            {exp:user:register return="/fg4/step_1" group_id="10" form:id="step_1"}
+            <div class="row">
+                <h2 class="mt-0 col-md-12">{fg4_entry_content_{language_code}}</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>{fg4_already_registered_{language_code}}</h3>
+                    <p><a href="{base}members-area" class="btn btn-prim" data-reveal-id="signin_modal">{sfm_signin_{language_code}}</a></p>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="mb-20">{please_register_{language_code}}</h3>
+                    <p class="mb-0 mt-0"><label class="hide_form_labels" for="username">{sfm_email_{language_code}}</label>
+                        <input type="text" name="username" id="email" placeholder="{sfm_email_{language_code}}" required="required">
+                    </p>
+                    <p class="mb-0 mt-0"><label class="hide_form_labels" for="password">{fg4_create_password_{language_code}}</label>
+                        <input type="password" name="password" id="password" placeholder="{sfm_password_{language_code}}" class="js_revealer_field" required="required">
+                    </p>
+                    <p class="mb-0 mt-0"><label class="hide_form_labels" for="password_confirm">{sfm_confirmpassword_{language_code}}</label>
+                        <input type="password" name="password_confirm" id="password_confirm" placeholder="{sfm_confirmpassword_{language_code}}" required="required">
+                    </p>
+                    <p class="mb-0 mt-20"><input class="btn btn-prim small" type="submit" name="submit" value="{sfm_submit_{language_code}}" required="required"></p>
+                    <input type="hidden" name="accept_terms" id="accept_terms" value="y">
+                </div>
+            </div>
+            {/exp:user:register}
+        </div>
+        {/exp:channel:entries}
+
+    {!-- END --}
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+<script src="/assets/js/jquery.validate.min.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="js_pageload"}
+$("#step_1").validate({
+  rules: {
+    password: "required",
+    password_confirm: {
+      equalTo: "#password"
+    },
+    username: {
+      required: true,
+      email: true
+    }
+  }
+});
+{/exp:partials:set}

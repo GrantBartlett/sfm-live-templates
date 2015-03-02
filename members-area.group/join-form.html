@@ -1,0 +1,43 @@
+<div class="entry-content mb-30">
+    <h2 class="mt-0 mb-10 text-center" style="font-size:35px;">Join SFM</h2>
+
+    <p class="mt-0 mb-20 text-center">{sfm_be_the_first_etc_{language_code}}</p>
+
+    <div class="mt-20 mb-10 text-center">
+        {exp:fbc:login login_button_label="Login with Facebook" logout_button_label="Facebook Logout" button_size="large" show_faces="false" permissions="email" return_when_logged_in="sfm-plus/index" return_when_logged_out="home/index" return_to_register="sfm-plus/join" return_on_failure="notification/facebook" max_rows="3" } {if fbc_logged_out == "y"} {fbc_login_button} {/if} {if fbc_logged_in == "y"}
+        <a href="{path='logout'}">{logout_{language_code}}</a> {/if} {/exp:fbc:login}
+        <p class="mt-10" style="font-size: 0.8em;">{sfm_do_you_have_a_facebook_account_{language_code}}</p>
+    </div>
+
+    {exp:user:register return="sfm-plus/index" form:class="custom revealer" required="email"}
+    <div class="mb-30">
+        <p class="mb-0 mt-10"><label class="hide_form_labels" for="screen_name">{sfm_username_{language_code}}</label>
+            <input type="text" name="screen_name" id="screen_name" placeholder="{sfm_username_{language_code}}" class="js_revealer_field"/>
+        </p>
+
+        <p class="mb-0 mt-0"><label class="hide_form_labels" for="username">{sfm_email_{language_code}}</label>
+            <input type="text" name="username" id="email" placeholder="{sfm_email_{language_code}}"/></p>
+
+        <p class="mb-0 mt-0"><label class="hide_form_labels" for="telephone">{sfm_telephone_{language_code}}
+                <small style="display:block">(optional – only used to inform you by SMS)</small>
+            </label> <input type="text" name="telephone" id="telephone" placeholder="{sfm_telephone_{language_code}}"/>
+        </p>
+        <p class="mb-0 mt-0"><label class="hide_form_labels" for="password">{sfm_password_{language_code}}</label>
+            <input type="password" name="password" id="password" placeholder="{sfm_password_{language_code}}" class="js_revealer_field"/>
+        </p>
+
+        <p class="mb-0 mt-0">
+            <label class="hide_form_labels" for="password_confirm">{sfm_confirmpassword_{language_code}}</label>
+            <input type="password" name="password_confirm" id="password_confirm" placeholder="{sfm_confirmpassword_{language_code}}"/>
+        </p>
+
+        <p class="mb-0 mt-20">
+            <input class="radius button medium mb-0 js_createaccount_button" type="submit" name="submit" value="Join SFM"/>
+        </p>
+    </div>
+    <input type="hidden" name="accept_terms" id="accept_terms" value="y"/>
+    <input type="hidden" name="friends" id="friends" value=""/> <input type="hidden" name="f_id" id="f_id" value=""/>
+    <input type="hidden" name="page_url" id="page_url" value="{current_url}"> {if user_no_results}
+    <p>You're currently logged in, and must be <a href="/?ACT=23"><b>logged out</b></a> to register a new account.</p>
+    {/if} {/exp:user:register}
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mall test</title>
+  </head>
+  <body>
+  {exp:channel:entries channel="mall" orderby="title" sort="asc"}
+  <small>Area: {categories}<a href="{path='channel/index'}">{category_name}</a>{/categories} | City: {city}</small>
+  <h1>{title}</h1>
+  <p>{mall_excerpt}</p>
+  {brands}
+  <hr>
+  <h4>{brands:title}</h4>
+  <p>{brands:brand_excerpt}</p>
+  {/brands}
+  <hr><hr>
+  {/exp:channel:entries}
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<section class="content-section featured-articles">
+    <div class="l-1c">
+        <h1 class="section-header">{editors_picks_{language_code}}</h1>
+        <div class="c-1">
+            {exp:channel:entries channel="entry" category_group="6" cache="yes" refresh="10" limit="3" sticky="yes" dynamic="no" status="{embed:status}"}
+            <article class="g-all-thirds {switch='||g-all-l'}">
+                <a href="{base}articles/reading/{url_title}/"><img src="{entry_image:3_col_large}" style="width: 100%"></a>
+                {categories limit="1" show_group="6"}<a href="{base}articles/category/{category_url_title}/" class="category">{category_name_{language_code}}</a>{/categories}
+                <h1 {entry_dir_lng}><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+                <p {entry_dir_lng}>{entry_excerpt_lng}</p>
+            </article>
+            {/exp:channel:entries}
+        </div>
+    </div>
+</section>

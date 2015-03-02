@@ -1,0 +1,30 @@
+{embed="__includes/wrapper" body_class="team" nav_active=""}
+
+{exp:partials:set name="content"}
+<div id="content">
+
+    {exp:channel:entries channel="team" url_title="{last_segment}"}
+        <div class="img-skew {if language_code == "en"}float-right{if:else}float-left{/if}">
+            <img src="{team_member_image:390}">
+        </div>
+
+        <header class="entry-header">
+            <h3 class="category">{team_member_job_{language_code}}</h3>
+            <h1 class="section-header text-left entry-title"><small>60 seconds with</small><br>{team_member_name_{language_code}}</h1>
+        </header>
+
+        <hr class="thin">
+
+        <article class="entry-content">
+            <p><strong>{team_member_large_excerpt_{language_code}}</strong></p>
+            <hr class="thin">
+            {team_member_content_{language_code}}
+        </article>
+    {/exp:channel:entries}
+
+</div>
+{/exp:partials:set}
+
+{exp:partials:set name="aside-right"}
+{embed="_aside/team" article-list-limit="24" status="{entry_status_lng}"}
+{/exp:partials:set}

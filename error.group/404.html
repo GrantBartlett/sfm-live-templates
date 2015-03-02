@@ -1,0 +1,35 @@
+{embed="__includes/wrapper" body_class="error full-width"}
+
+{exp:partials:set name="page_title"}Saudi Fashion Magazine | Fashion, News, Culture, Style, Beauty & More{/exp:partials:set}
+{exp:partials:set name="meta_keywords"}Fashion, Lifestyle, Style, Health, Beauty, Technology, News{/exp:partials:set}
+{exp:partials:set name="meta_description"}The online luxury lifestyle magazine for the Middle East that brings a unique mix of fashion, lifestyle, beauty and technology from across the globe.{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+  <section class="content-section featured-articles">
+
+    <img src="/themes/site_themes/saudifashion/404.jpg" style="float: right; margin: 0 0 20px 20px">
+    <h1 class="entry-title">404 Error</h1>
+    <p><strong>Sorry something went wrong, the page you were looking for is not here.</strong></p>
+    <p>Maybe you can find what you are looking for below: </p>
+    {exp:navee:nav nav_title="main_navigation_{language_code}" last_class="last" list_type="ol"}
+
+    <section class="content-section l-1c">
+      <hr class="clear">
+      {embed="articles/editors-picks" status="{entry_status_lng}"}
+      {embed="articles/list-of-threes" status="{entry_status_lng}"}
+    </section>
+
+    <aside id="sidebar">
+      <hr class="clear">
+      {embed="articles/list-excerpt-image" article-list-limit="9" status="{entry_status_lng}"}
+    </aside>
+
+  </section>
+
+
+</div>
+
+{/exp:partials:set}

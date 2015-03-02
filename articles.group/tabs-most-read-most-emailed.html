@@ -1,0 +1,32 @@
+{!-- TABS --}
+{!-- TODOS:
+  The most emailed articles takes from clicking the email button on each article
+  this needs to change to when send has been comfirmed
+--}
+
+{!--
+<section id="widget-popular-articles">
+  <div class="section-container auto" data-section>
+    <section>
+      <p class="title" data-section-title><a href="#panel1">{most_read_{language_code}}</a></p>
+      <div class="content" data-section-content>
+        <ol>
+          {exp:channel:entries channel="entry" dynamic="no" category_group="6" orderby="view_count_one" sort="desc" sticky="no" limit="10" cache="yes" refresh="60" status="{embed:status}"}
+          <li><span>{count}</span> <a href="{base}articles/reading/{url_title}/">{entry_name_{language_code}}</a></li>
+          {/exp:channel:entries}
+        </ol>
+      </div>
+    </section>
+    <section>
+      <p class="title" data-section-title><a href="#panel2">{most_emailed_{language_code}}</a></p>
+      <div class="content" data-section-content>
+        <ol>
+          {exp:channel:entries channel="entry" dynamic="no" category_group="6" orderby="view_count_two" sort="desc" sticky="no" limit="10" status="{embed:status}"}
+          <li><span>{count}</span> <a href="{base}articles/reading/{url_title}/">{entry_name_{language_code}}</a></li>
+          {/exp:channel:entries}
+        </ol>
+      </div>
+    </section>
+  </div>
+</section>
+--}

@@ -1,0 +1,15 @@
+{redirect="{last_page_visited}"}
+
+{if language_code == 'ar'}
+Arabic Text
+{if:else}
+English Text
+{/if}
+
+{exp:stash:set name="lng" scope="user" save="yes" parse_conditionals="yes" type="snippet"}
+{if language_code == 'ar'}
+ar
+{if:else}
+en
+{/if}
+{/exp:stash:set}

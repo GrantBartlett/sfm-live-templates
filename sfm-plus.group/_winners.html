@@ -1,0 +1,57 @@
+<section class="competition  mt-20 mb-20">
+    <div class="mt-20 mb-20 g-all-c clearfix">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="winner-all clearfix" style="display: none;">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-md-10">
+                            <div class="winner-title pull-left">
+                                {sfm_latest_winner_{language_code}}
+                            </div>
+                            <div class="winner-ticker">
+                                <ul>
+                                {exp:channel:entries channel="offers" show_future_entries="yes" show_expired="yes" orderby="expiration_date" sort="desc" dynamic="no" {if '{embed:detail_entry_id}'}entry_id="not {embed:detail_entry_id}{/if}" }
+                                    {offer_winner_names}
+                                        <li>
+                                            {sfm_congratulations_to_{language_code}} <a href="{base}sfm-plus/offers/{url_title}">{offer_winner_names:title}</a>, {sfm_winner_of_the_{language_code}} <a href="{base}sfm-plus/offers/{url_title}">{title}</a> {sfm_competition_lc_{language_code}}
+                                        </li>
+                                    {/offer_winner_names}
+                                {/exp:channel:entries}
+                                </ul>
+                            </div>
+                        </div>
+
+                         <div class="col-xs-12 col-md-2">
+                            <div class="winner-controls pull-right" style="display: inline-block">
+                                <div class="btn-group">
+                                    <button type="button" class="bs-button btn-default btn-up"><i class="fa fa-chevron-{if language_code == 'en'}left{if:else}right{/if}"></i>
+                                    </button>
+                                    <button type="button" class="bs-button btn-default btn-down"><i class="fa fa-chevron-{if language_code == 'en'}right{if:else}left{/if}"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="/assets/js/jquery.easy-ticker.min.js"></script>
+<script>
+    $(function(){
+        $('.winner-all').fadeIn(1500);
+        $('.winner-ticker').easyTicker({
+            direction: 'left',
+            visible: '1',
+            controls: {
+                up: '.btn-up',
+                down: '.btn-down'
+            }
+        });
+    });
+</script>

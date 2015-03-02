@@ -1,0 +1,94 @@
+{embed="__includes/wrapper" body_class="home"}
+
+{exp:partials:set name="escape-wrapper"}
+
+<style>
+  .pane-wrapper {
+    height: 300px;
+    background: #EEE;
+  }
+</style>
+
+<div class="pane-wrapper">
+  <div class="pane-wrapper-inner">
+    <section class="content-section featured-articles">
+      Hello
+    </section>
+  </div>
+</div>
+
+
+
+{/exp:partials:set}
+
+{exp:partials:set name="content"}
+
+<div id="content">
+
+  <section class="content-section featured-articles">
+
+    {!--
+
+    // -- language is ar
+    //  -- arabic, no english == SHOW
+    //  -- arabic and english == SHOW AR VERSION
+    //  -- english, no arabic == HIDE
+
+    // -- language is en
+    //  -- english, no arabic == SHOW
+    //  -- arabic and english == SHOW EN VERSION
+    //  -- arabic, no english == HIDE
+
+    --}
+
+    {embed="home/feature" status="{entry_status_lng}"}
+    {embed="home/second-feature" status="{entry_status_lng}"}
+
+  </section>
+
+  <hr>
+
+  <section class="content-section l-70-30c">
+
+    {embed="home/70_30_articles" status="{entry_status_lng}"}
+
+  </section>
+
+  {ad_sfm_plus_banner_white}
+
+  <section class="content-section l-70-30c">
+
+    <h1 class="section-header">{video_and_pictures_{language_code}}</h1>
+
+    <div class="c-1">
+      {embed="home/video" status="{entry_status_lng}"}
+    </div>
+
+    <div class="c-2">
+      {embed="_entry/trending"}
+    </div>
+
+  </section>
+
+  {ad_sfm_plus_banner_black}
+
+  {embed="articles/list-of-threes" status="{entry_status_lng}"}
+
+  {ad_sfm_plus_banner_white}
+
+</div>
+
+{/exp:partials:set}
+
+{exp:partials:set name="footer_script_includes"}
+<script src="/assets/js/banner.js"></script>
+{/exp:partials:set}
+
+{exp:partials:set name="js_pageload"}
+// Required by home
+HomeBanner.init();
+{/exp:partials:set}
+
+{exp:partials:set name="footer_last"}
+<script src="/assets/js/adaptive_video.js"></script>
+{/exp:partials:set}

@@ -1,0 +1,39 @@
+{if logged_out}
+{redirect="/fg4/"}
+{/if}
+
+{exp:freeform:entries form_name="fg4" author_id="{exp:stash:get name="mem_id"}" limit="1" parse="inward"}
+{if freeform:no_results}
+    {redirect="/fg4/step_2"}
+{/if}
+{/exp:freeform:entries}
+
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+{exp:partials:set name="content"}
+{!-- BEGIN --}
+
+    {exp:channel:entries channel="fg4" limit="1" entry_id="923"}
+        {if logged_in}
+        <header class="entry-header">
+            <section class="clearfix">
+                <div class="left">
+                    <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+                    <h2 class="entry-title">{fg4_s_entry_name_{language_code}}</h2>
+                </div>
+                <div class="{if language_code == 'en'}right{if:else}left{/if} fg4logo">
+                    <img src="{fg4_logo}">
+                </div>
+            </section>
+            <hr>
+        </header>
+
+        {embed="fg4/_feature"}
+        <div class="halves {if language_code == 'en'}right{if:else}left{/if} mb-30 entry-content">
+            {fg4_entry_content_{language_code}}
+            <a href="{base}fg4/portfolio/" class="btn btn-prim"><i class="icon-pencil"></i> {upload_edit_portfolio_{language_code}}</a></p>
+        </div>
+        {/if}
+    {/exp:channel:entries}
+
+{!-- END --}
+{/exp:partials:set}

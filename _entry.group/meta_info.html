@@ -1,0 +1,97 @@
+<?php
+$type = "{embed:type}";
+
+switch ($type) {
+  case "video":
+    $share_url = "videos/watching/";
+    break;
+  case "lookbook":
+    $share_url = "lookbooks/viewing/";
+    break;
+  case "article":
+    $share_url = "articles/reading/";
+    break;
+  case "offers":
+    $share_url = "sfm-plus/offers/";
+    break;
+}
+?>
+<div class="entry-meta">
+    {!--
+  <span class="entry-byline">{embed:entry_date}</span>
+    --}
+  <span class="entry-comments"><a href="#comments"><i class="icon-comments-alt"></i> {comments_{language_code}}</a></span>
+  {!--
+  <span class="entry-email">
+    <a href="{base}articles/email/{embed:url_title}/" target="_blank" class="email_article" data-reveal-id="myModal"
+                               data-reveal-ajax="true">
+      <i class="icon-envelope-alt"></i> {share_email_{language_code}}
+    </a>
+  </span>
+  --}
+  <span class="entry-email">
+    <a href="/_entry/email_entry" target="_blank" class="email_article" data-reveal-id="myModal"
+                               data-reveal-ajax="true">
+      <i class="icon-envelope-alt"></i> {share_email_{language_code}}
+    </a>
+  </span>
+  <span class="entry-print">
+    <a href="#" target="_blank" onclick="window.print(); return false"><i class="icon-print"></i>
+      {share_print_{language_code}}
+    </a>
+  </span>
+  <span class="entry-share share">
+    <a href="#"><i class="icon-share"></i> {share_share_{language_code}}</a>
+        <ul class="share-icons">
+          <li class="facebook">
+            <a href="http://www.facebook.com/sharer.php?u={base}{exp:url_encode}<?php echo $share_url; ?>{embed:url_title}/{/exp:url_encode}"target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <span></span> Facebook
+            </a>
+          </li>
+          <li class="twitter">
+            <a href="https://twitter.com/intent/tweet?text={exp:url_encode}{embed:title}{/exp:url_encode}&amp;url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;via=SaudiFashionMag" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;">
+              <span></span> Twitter
+            </a>
+          </li>
+          <li class="tumblr">
+            <a href="http://www.tumblr.com/share/link?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;name=SaudiFashionMag" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <span></span> Tumblr
+            </a>
+          </li>
+          <li class="linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}&amp;summary={exp:url_encode}{entry_excerpt}{/exp:url_encode}&amp;source=SaudiFashionMag" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <span></span> LinkedIn
+            </a>
+          </li>
+          <li class="stumbleupon">
+            <a href="http://www.stumbleupon.com/submit?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=380,width=780');return false;">
+              <span></span> StumbleUpon
+            </a>
+          </li>
+          <li class="reddit">
+            <a href="http://reddit.com/submit?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <span></span> Reddit
+            </a>
+          </li>
+          <li class="digg">
+            <a href="http://digg.com/submit?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=666,width=1060');return false;">
+              <span></span> Digg
+            </a>
+          </li>
+          <li class="delicious">
+            <a href="http://delicious.com/post?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}&amp;title={exp:url_encode}{title}{/exp:url_encode}" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
+              <span></span> Delicious
+            </a>
+          </li>
+          <li class="google">
+            <a href="https://plus.google.com/share?url={base}{exp:url_encode}<?= $share_url; ?>{embed:url_title}/{/exp:url_encode}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=500');return false;">
+              <span></span> Google+
+            </a>
+          </li>
+        </ul>
+  </span>
+  <span class="entry-follow"><a href="http://twitter.com/SAUDIFashionMAG" target="_blank"><i class="icon-twitter"></i>
+      {follow_{language_code}}</a></span>
+</div>
+
+<div id="myModal" class="reveal-modal small send-to-friend"></div>

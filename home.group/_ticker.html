@@ -1,0 +1,75 @@
+<section class="competition mt-20" style="min-height:50px;">
+    <div class="g-all-c clearfix">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="winner-all latest clearfix" style="display: none;">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-md-10 {if language_code == 'ar'}pull-right{/if}">
+                            <div class="winner-title {if language_code == 'en'}pull-left{if:else}pull-right{/if}" {if language_code == 'ar'}style="margin-left: 15px;"{/if}>
+                                {the_latest_{language_code}}:
+                            </div>
+                            <div class="winner-ticker">
+                                <ul>
+                                    {exp:channel:entries channel="home" limit="10" url_title="{last_segment}"}
+                                        {ticker_stories}
+
+                                            {exp:switchee variable="{ticker_stories:channel}" parse="inward"}
+
+                                                {case value="Competitions"}
+                                                    <li style="padding-bottom:10px;">
+                                                        <a href="{base}sfm-plus/offers/{ticker_stories:url_title}" title="{ticker_stories:offer_name_{language_code}}">{ticker_stories:offer_name_{language_code}}</a>
+                                                    </li>
+                                                {/case}
+
+                                                {case value="Entry"}
+                                                     <li style="padding-bottom:10px;">
+                                                        <a href="{base}articles/reading/{ticker_stories:url_title}" title="{ticker_stories:entry_name_{language_code}}">{ticker_stories:entry_name_{language_code}}</a>
+                                                    </li>
+                                                {/case}
+
+                                            {/exp:switchee}
+
+                                        {/ticker_stories}
+                                    {/exp:channel:entries}
+                                </ul>
+                            </div>
+                        </div>
+
+                         <div class="col-xs-12 col-md-2">
+                            <div class="winner-controls {if language_code == 'en'}pull-right{if:else}pull-left{/if}" style="display: inline-block">
+                                <div class="btn-group">
+                                    <button type="button" class="bs-button btn-default btn-up"><i class="fa fa-chevron-{if language_code == 'en'}left{if:else}right{/if}"></i>
+                                    </button>
+                                    <button type="button" class="bs-button btn-default btn-down"><i class="fa fa-chevron-{if language_code == 'en'}right{if:else}left{/if}"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="/assets/js/jquery.easy-ticker.min.js"></script>
+<script>
+    $(function(){
+        $('.winner-all').fadeIn(1500);
+        $('.winner-ticker').easyTicker({
+            direction: 'left',
+            easing: 'swing',
+            speed: 'slow',
+            interval: 5000,
+            height: '22',
+            controls: {
+                up: '.btn-up',
+                down: '.btn-down'
+            }
+        });
+    });
+</script>
+

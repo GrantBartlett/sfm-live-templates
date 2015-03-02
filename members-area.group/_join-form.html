@@ -1,0 +1,86 @@
+{exp:user:register form:id="js_register_modal" required="username|password" return="/" error_page="sfm-plus"}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="text-center" style="font-size: 35px;color: #D1D1D1;padding: 15px;"><i class="fa fa-user fa-3x"></i></h1>
+
+        <h2 style="font-size: 22px;text-align: center;margin-bottom: 20px;color: #3F3F3F;">{membersarea_RegisterAnAccount_{language_code}} </h2>
+
+        <div class="form-group">
+            <label for="username">{sfm_email_{language_code}}</label>
+            <input type="text" name="username" id="email" placeholder="{sharetowin_EmailPlaceHolder_{language_code}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="password">{sfm_password_{language_code}}</label>
+            <input type="password" name="password" id="password" placeholder="{membersarea_PasswordPlaceHolder_{language_code}}" class="js_revealer_field form-control" required>
+        </div>
+
+        <div id="message_register" class="clearfix mb-10 alert alert-warning" style="display: none;font-size:13px!important;"></div>
+
+        <input type="hidden" name="accept_terms" id="accept_terms" value="y">
+        <input type="hidden" name="page_url" id="page_url" value="{current_url}">
+
+        {if language_code == 'en'}
+        <div class="checkbox">
+            <small>
+                <label>
+                    <input type="checkbox" name="newsletter_terms" value="y"> {sharetowin_AcceptEmailTerms_{language_code}}
+                </label>
+            </small>
+        </div>
+        {/if}
+
+        <p>
+            <input class="btn-lg btn btn-default btn-green btn-action" type="submit" name="submit" value="{membersarea_RegisterNow_{language_code}}">
+        </p>
+
+        <p class="text-center form-text">
+            {membersarea_AlreadyHaveAnAccount_{language_code}}
+            <a href="/members-area/" data-reveal-id="signin_modal">{sign_in_{language_code}}</a>
+        </p>
+
+        <div class="form-group text-center facebook-login">
+            {exp:fbc:login login_button_label="{membersarea_SignInUsingFacebook_{language_code}}" permissions="email|" return_on_failure="/members-area" button_size="large" } {if fbc_logged_out == "y"}{fbc_login_button}{/if} {if fbc_logged_in == "y"}{membersarea_LoggedInThroughFacebook_{language_code}} (<a href="{path='logout'}">{membersarea_LogOut_{language_code}}</a>){/if} {/exp:fbc:login}
+        </div>
+
+        {/exp:user:register}
+
+
+        <script type="text/javascript">
+            // prepare the form when the DOM is ready
+            $(function () {
+                $('#js_register_modal').parsley();
+
+                var options = {
+                    target: '#message_register',   // target element(s) to be updated with server response
+                    success: showResponseJoin  // post-submit callback
+                };
+
+                // bind to the form's submit event
+                $('#js_register_modal').submit(function () {
+                    // inside event callbacks 'this' is the DOM element so we first
+                    // wrap it in a jQuery object and then invoke ajaxSubmit
+                    $(this).ajaxSubmit(options);
+
+                    // !!! Important !!!
+                    // always return false to prevent standard browser submit and page navigation
+                    return false;
+                });
+
+            });
+
+            function showResponseJoin(responseText, statusText, xhr, $form)  {
+                $("#message_register").fadeIn(500);
+
+                if(responseText == '[object Object]')
+                {
+                     $("#message_register").html("You are now registered, redirecting...");
+                    // Registered
+                    window.location.reload();
+                }
+            }
+        </script>
+
+    </div>
+</div>

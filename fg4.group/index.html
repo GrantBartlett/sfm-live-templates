@@ -1,0 +1,32 @@
+{embed="__includes/wrapper" body_class="fg4-competition sub home"}
+
+{exp:partials:set name="last_head"}
+<link rel="stylesheet" href="http://h5bp.github.io/Effeckt.css/assets/css/effeckt.css">
+{/exp:partials:set}
+
+{exp:partials:set name="content"}
+{exp:channel:entries channel="fg4" limit="1" entry_id="917"}
+
+<header class="entry-header">
+    <section class="clearfix">
+        <div class="{if language_code == 'en'}left{if:else}right{/if}" style="width:80%">
+            <h1 class="section-header {if language_code == 'en'}text-left{if:else}text-right{/if} mb-0 pb-10">{fg4_entry_name_{language_code}}</h1>
+            <h2 class="entry-title">{fg4_s_entry_name_{language_code}}</h2>
+        </div>
+        <div class="{if language_code == 'en'}right{if:else}left{/if} fg4logo">
+            <img src="{fg4_logo}">
+        </div>
+    </section>
+    <hr>
+</header>
+
+{embed="fg4/_feature"}
+<div class="halves {if language_code == 'en'}right{if:else}left{/if} mb-0 entry-content">
+    {fg4_entry_content_{language_code}}
+    <p>
+        <a href="{base}fg4/step_1" class="btn btn-prim">{fg4_next_{language_code}} <i class="icon-caret-right"></i></a>
+    </p>
+</div>
+
+{/exp:channel:entries}
+{/exp:partials:set}

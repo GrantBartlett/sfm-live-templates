@@ -1,0 +1,73 @@
+<section class="content-section the-latest">
+    <header>
+        <h1 class="section-header">{the_latest_{language_code}}</h1>
+    </header>
+    {exp:channel:entries
+        channel="entry"
+        sticky="no"
+        dynamic="no"
+        category="{embed:category}"
+        category_group="6"
+        offset="{embed:offset}"
+        limit="{embed:limit}"
+        cache="yes"
+        refresh="10"
+        orderby="entry_date"
+        sort="desc"
+        status="{embed:status}"}
+    <article class="l-70-30cr post">
+        <a href="{base}articles/reading/{url_title}/" class="c-1"><img src="/images/placeholders/264x176.gif" data-src="{entry_image:3_col_large}" style="width: 100%"></a>
+
+        <div class="c-2">
+            {categories limit="1" show_group="6"}
+            <a href="{base}articles/category/{category_url_title}/" class="category">
+                {category_name_{language_code}}
+            </a>
+            {/categories}
+            <h1><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+            <p>{entry_description_lng}</p>
+        </div>
+    </article>
+    {if no_results}
+        Sorry, there are no articles yet...
+    {/if}
+    {/exp:channel:entries}
+</section>
+
+{!-- 4 column grid
+<section class="content-section the-latest">
+  <header>
+    <h1 class="section-header">{the_latest_{language_code}}</h1>
+  </header>
+  {exp:channel:entries
+    channel="entry"
+    sticky="no"
+    dynamic="no"
+    category="{embed:category}"
+    category_group="6"
+    offset="{embed:offset}"
+    limit="{embed:limit}"
+    cache="yes"
+    refresh="10"
+    orderby="entry_date"
+    sort="desc"
+    status="{embed:status}"}
+
+  {exp:grouper:start groupby="4" count="{count}" total="{total_results}"}
+  <div class="three-clear l-4c">
+    {/exp:grouper:start}
+
+    <article class="tertiary {switch='c-1|c-2|c-3|c-4'} video" {entry_dir_lng}>
+      <a href="{base}articles/reading/{url_title}/" class="image">
+        <img src="{entry_image:3_col_large}" style="width: 100%">
+      </a>
+      <h1 class="gamma"><a href="{base}articles/reading/{url_title}/">{entry_name_lng}</a></h1>
+    </article>
+
+    {exp:grouper:end groupby="4" count="{count}" total="{total_results}"}
+  </div>
+  {/exp:grouper:end}
+  {if no_results}<p>Sorry, no results returned</p>{/if}
+  {/exp:channel:entries}
+</section>
+--}

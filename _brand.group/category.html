@@ -1,0 +1,12 @@
+<span class="m-pout d-2">
+  <h2>
+    <a href="#opentime" class="e-show-data">Brand Categories +</a>
+    {if last_segment_category_name} You're viewing <b>{last_segment_category_name}</b>.{/if}
+  </h2>
+  <ul class="h-data l-4c">
+    <li class="child"><a href="/shopping/brands/">All</a></li>
+    {exp:channel:categories channel="brand" style="linear"}
+    <li class="child {if last_segment == category_url_title}current{/if}"><a href="/shopping/brands/category/{category_url_title}/">{category_name}</a></li>
+    {/exp:channel:categories}
+  </ul>
+</span>

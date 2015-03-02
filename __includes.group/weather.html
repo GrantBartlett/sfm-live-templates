@@ -1,0 +1,19 @@
+<script src="/assets/js/vendor/jquery.js"></script>
+
+<script>
+  var weather_data = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D1939753%20and%20u%3D%22c%22&format=json";
+  $.ajax({
+    url: weather_data,
+    dataType: "jsonp",
+    success: function(data) {
+      console.dir( data.query.results.channel );
+      var astro_atmos = data.query.results.channel,
+          sunrise = astro_atmos.astronomy.sunrise,
+          sunset = astro_atmos.astronomy.sunset,
+          visibility = astro_atmos.atmosphere.visibility;
+      var weather = data.query.results.channel.item.condition,
+          forecast_1 = data.query.results.channel.item.forecast[0];
+    }
+  // test
+  });
+</script>

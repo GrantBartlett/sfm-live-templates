@@ -1,0 +1,50 @@
+<aside id="sidebar" class="c-1 hl-hide h-hide tp-hide">
+  <section id="ad-space-a" class="advert g-tp-6 g-tp-l">
+    <img src="/images/placeholders/advert_300x250.gif">
+  </section>
+  <div class="h-hide hl-hide tp-hide">
+
+    {if segment_2 != "" AND segment_2 != "brands"}
+    {exp:channel:entries channel="mall" url_title="{segment_3}" limit="1" cache="yes" refresh="60"}
+    <section class="sidebar-2col mb-20">
+      <header>
+        <h1>Other Malls in {city}</h1>
+      </header>
+      {embed="_mall/list-image-title"
+      class="mb-20"
+      orderby="title"
+      alternate="c-1|c-2"
+      city="{city}"
+      exclude="{entry_id}"}
+    </section>
+    {/exp:channel:entries}
+    {/if}
+
+    {embed="_mall/area-list"}
+
+    {embed="_deals/list-image-title"}
+
+    <section class="advert g-tp-6 g-tp-l">
+      <img src="/images/placeholders/advert_300x250.gif">
+    </section>
+
+    {if segment_2 != "brands"}
+    <section class="sidebar-2col mb-20">
+      <header>
+        <h1>Brands <small style="float: right;"><a href="/shopping/brands/">View all</a></small></h1>
+      </header>
+      {embed="_brand/list-image"
+      limit="12"
+      class="brand mb-20"
+      orderby="random"
+      alternate="c-1|c-2"
+      count="{count}"
+      link="/shopping/brand/{url_title}/"
+      link_title="{title}"
+      img_url="{brand_logo}"
+      img_alt="{title}"}
+    </section>
+    {/if}
+
+  </div>
+</aside>
